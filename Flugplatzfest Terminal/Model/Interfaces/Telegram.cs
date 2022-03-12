@@ -12,23 +12,20 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
     internal class Telegram
     {
         private Events events;
-
         private TelegramBotClient botClient;
         private CancellationToken ct;
         private ReceiverOptions receiverOptions;
         private ChatList chatList;
 
-        public Telegram(string token, Events events, ChatList chatList)
+        public Telegram(string telegramToken, Events events)
         {
             this.events = events;
 
-            botClient = new TelegramBotClient(token);
+            botClient = new TelegramBotClient(telegramToken);
 
             CancellationTokenSource cts = new CancellationTokenSource();
 
             ct = cts.Token;
-
-            this.chatList = chatList;
 
             receiverOptions = new ReceiverOptions
             {
@@ -61,7 +58,7 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
 
             Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-            events.OnMessageReceived(new TextMessage(messageText, new Messages.ChatId(InterfaceType.Telegram, chatId, chatList)));
+            events.OnMessageReceived(new TextMessage(messageText, new Messages.ChatId(InterfaceType.Telegram, chatId), MessageDirection.incoming));
         }
 
         private Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)

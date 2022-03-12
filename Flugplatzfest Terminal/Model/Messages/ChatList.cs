@@ -1,25 +1,26 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Flugplatzfest_Terminal.Model.Messages
 {
     public class ChatList
     {
-        private List<ChatId> chatIds;
+        private Dictionary<ChatId, Queue<string>> chatList;
 
         public ChatList()
         {
-            chatIds = new List<ChatId>();
+            chatList = new Dictionary<ChatId, Queue<string>>();
         }
 
-        public bool AddChatId(ChatId chatId)
+        public bool AddMessage(TextMessage message)
         {
-            ChatId chatID = chatIds.FirstOrDefault(x => (x.GetInterfaceType() == chatId.GetInterfaceType() && x.GetChatID() == chatId.GetChatID()));
-            if (chatID == null)
+            bool exists = chatList.TryGetValue(message.GetChatID(), out Queue<string> queue);
+            if (!exists)
             {
-                chatIds.Add(chatId);
+                queue = new Queue<string>();
             }
-            return chatID == null;
+            queue.Enqueue(message.GetMessage());
+            chatList[message.GetChatID()] = queue;
+            return !exists;
         }
     }
 }

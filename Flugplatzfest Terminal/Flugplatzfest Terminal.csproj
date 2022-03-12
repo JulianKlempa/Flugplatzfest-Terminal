@@ -105,10 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Events.cs" />
+    <Compile Include="Model\Interfaces\Interface.cs" />
     <Compile Include="Model\Interfaces\Telegram.cs" />
     <Compile Include="Model\Messages\ChatId.cs" />
     <Compile Include="Model\Messages\ChatList.cs" />
     <Compile Include="Model\Messages\InterfaceType.cs" />
+    <Compile Include="Model\Messages\MessageDirection.cs" />
     <Compile Include="Model\Messages\TextMessage.cs" />
     <Compile Include="Model\Speisekarte.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
