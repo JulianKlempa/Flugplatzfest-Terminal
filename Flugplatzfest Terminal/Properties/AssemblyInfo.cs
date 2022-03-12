@@ -28,7 +28,6 @@ using System.Windows;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
-
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //Speicherort der designspezifischen Ressourcenwörterbücher
                                      //(wird verwendet, wenn eine Ressource auf der Seite nicht gefunden wird,
@@ -37,7 +36,6 @@ using System.Windows;
                                               //(wird verwendet, wenn eine Ressource auf der Seite nicht gefunden wird,
                                               // designspezifischen Ressourcenwörterbuch nicht gefunden werden kann.)
 )]
-
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
@@ -50,4 +48,4 @@ using System.Windows;
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")] 

@@ -1,23 +1,22 @@
-﻿using System;
+﻿using Flugplatzfest_Terminal.Model.Messages;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Flugplatzfest_Terminal.Model;
-using Flugplatzfest_Terminal.Model.Messages;
 
 namespace Flugplatzfest_Terminal.Model.Interfaces
 {
-    class Telegram
+    internal class Telegram
     {
         private Events events;
 
-        TelegramBotClient botClient;
-        CancellationToken ct;
-        ReceiverOptions receiverOptions;
-        ChatList chatList;
+        private TelegramBotClient botClient;
+        private CancellationToken ct;
+        private ReceiverOptions receiverOptions;
+        private ChatList chatList;
 
         public Telegram(string token, Events events, ChatList chatList)
         {

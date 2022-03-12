@@ -10,8 +10,9 @@ namespace Flugplatzfest_Terminal
     /// </summary>
     public partial class MainWindow : Window
     {
-        Model.Interfaces.Telegram telegram;
-        Speisekarte speisekarte;
+        private Model.Interfaces.Telegram telegram;
+        private Speisekarte speisekarte;
+
         public MainWindow()
         {
             Events events = new Events();

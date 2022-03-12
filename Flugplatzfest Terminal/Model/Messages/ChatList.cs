@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telegram.Bot.Types;
 
 namespace Flugplatzfest_Terminal.Model.Messages
 {
@@ -19,7 +15,7 @@ namespace Flugplatzfest_Terminal.Model.Messages
         public bool AddChatId(ChatId chatId)
         {
             ChatId chatID = chatIds.FirstOrDefault(x => (x.GetInterfaceType() == chatId.GetInterfaceType() && x.GetChatID() == chatId.GetChatID()));
-            if(chatID == null)
+            if (chatID == null)
             {
                 chatIds.Add(chatId);
             }
