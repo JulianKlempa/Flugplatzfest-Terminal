@@ -32,7 +32,7 @@ namespace Flugplatzfest_Terminal
             }
             else
             {
-                telegram.SendMessage(new TextMessage("okay", message.GetChatID()));
+                telegram.SendMessage(message);
             }
         }
     }
