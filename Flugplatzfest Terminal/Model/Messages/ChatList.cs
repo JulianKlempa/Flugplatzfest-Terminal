@@ -13,6 +13,7 @@ namespace Flugplatzfest_Terminal.Model.Messages
 
         public bool AddMessage(TextMessage message)
         {
+            //TODO fix evaluation
             bool exists = chatList.TryGetValue(message.GetChatID(), out Queue<string> queue);
             if (!exists)
             {
