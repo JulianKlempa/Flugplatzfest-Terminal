@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flugplatzfest_Terminal.Model
+namespace Flugplatzfest_Terminal.Model.Messages
 {
-    class Telegram
+    public enum InterfaceType
     {
-        public Telegram()
-        {
-
-        }
+        Telegram,
+        WhatsApp,
+        Signal
     }
 }
