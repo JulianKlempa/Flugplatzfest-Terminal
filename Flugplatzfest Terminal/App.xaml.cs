@@ -18,17 +18,17 @@ namespace Flugplatzfest_Terminal
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel()
-            };
-
             Events events = new Events();
             events.MessageReceived += Events_MessageReceived;
             speisekarte = new Speisekarte("Das ist eine Speisekarte \n1. \n2.");
             string telegramToken = "5271526292:AAH0KJH2ULkRSWMmBZPoGeeLzpwyW0TOn1k";
             chatList = new ChatList();
             interfaces = new Interface(telegramToken, events, chatList);
+
+            MainWindow = new MainWindow()
+            {
+                DataContext = new MainViewModel(chatList, interfaces)
+            };
 
             MainWindow.Show();
             base.OnStartup(e);
