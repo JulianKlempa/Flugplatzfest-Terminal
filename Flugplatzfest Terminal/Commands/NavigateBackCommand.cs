@@ -5,14 +5,14 @@ using Flugplatzfest_Terminal.ViewModels;
 
 namespace Flugplatzfest_Terminal.Commands
 {
-    public class NavigateSettingsCommand : CommandBase
+    public class NavigateBackCommand : CommandBase
     {
         private NavigationStore navigationStore;
         private Interface inter;
         private ChatList chatList;
         private App app;
 
-        public NavigateSettingsCommand(NavigationStore navigationStore, Interface inter, ChatList chatList, App app)
+        public NavigateBackCommand(NavigationStore navigationStore, Interface inter, ChatList chatList, App app)
         {
             this.navigationStore = navigationStore;
             this.inter = inter;
@@ -22,7 +22,7 @@ namespace Flugplatzfest_Terminal.Commands
 
         public override void Execute(object parameter)
         {
-            navigationStore.CurrentViewModel = new SettingsViewModel(app, navigationStore, inter, chatList);
+            navigationStore.CurrentViewModel = new TerminalViewModel(chatList, inter, navigationStore, app);
         }
     }
 }

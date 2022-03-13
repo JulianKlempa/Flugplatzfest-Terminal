@@ -27,12 +27,12 @@ namespace Flugplatzfest_Terminal.ViewModels
 
         public ICommand NavigateSettingsCommand { get; }
 
-        public TerminalViewModel(ChatList chatList, Interface inter, NavigationStore navigationStore)
+        public TerminalViewModel(ChatList chatList, Interface inter, NavigationStore navigationStore, App app)
         {
             chats = new ObservableCollection<ChatViewModel>();
             messages = new ObservableCollection<MessageViewModel>();
             SendCommand = new SendMessageCommand(this, inter);
-            NavigateSettingsCommand = new NavigateSettingsCommand(navigationStore);
+            NavigateSettingsCommand = new NavigateSettingsCommand(navigationStore, inter, chatList, app);
 
             TextMessage message = new TextMessage("Test", new ChatId(InterfaceType.Telegram, 187), MessageDirection.incoming);
             chatList.AddMessage(message);

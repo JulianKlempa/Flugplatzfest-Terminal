@@ -14,7 +14,7 @@ namespace Flugplatzfest_Terminal
     public partial class App : Application
     {
         private readonly Interface inter;
-        private readonly Speisekarte speisekarte;
+        private Menu menu;
         private readonly ChatList chatList;
         private readonly NavigationStore navigationStore;
 
@@ -22,7 +22,7 @@ namespace Flugplatzfest_Terminal
         {
             Events events = new Events();
             events.MessageReceived += Events_MessageReceived;
-            speisekarte = new Speisekarte("Das ist eine Speisekarte \n1. \n2.");
+            menu = new Menu("Das ist eine Speisekarte \n1. \n2.");
             string telegramToken = "5271526292:AAH0KJH2ULkRSWMmBZPoGeeLzpwyW0TOn1k";
             chatList = new ChatList();
             inter = new Interface(telegramToken, events, chatList);
@@ -31,7 +31,7 @@ namespace Flugplatzfest_Terminal
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            navigationStore.CurrentViewModel = new TerminalViewModel(chatList, inter, navigationStore);
+            navigationStore.CurrentViewModel = new TerminalViewModel(chatList, inter, navigationStore, this);
 
             MainWindow = new MainWindow()
             {
@@ -44,15 +44,25 @@ namespace Flugplatzfest_Terminal
 
         private void Events_MessageReceived(TextMessage message)
         {
-            if (chatList.AddMessage(message))
+            if (chatList.AddMessage(message) || message.GetMessage().ToLower().Contains("karte"))
             {
-                inter.SendMessage(new TextMessage(speisekarte.GetSpeisekarte(), message.GetChatID(), MessageDirection.outgoing));
+                inter.SendMessage(new TextMessage(menu.GetMenu(), message.GetChatID(), MessageDirection.outgoing));
             }
             else
             {
                 inter.SendMessage(message);
             }
             Console.WriteLine(message.GetMessage());
+        }
+
+        public void SetMenu(string menuString)
+        {
+            menu.SetMenu(menuString);
+        }
+
+        public string GetMenu()
+        {
+            return menu.GetMenu();
         }
     }
 }
