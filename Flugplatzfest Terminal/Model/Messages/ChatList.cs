@@ -23,10 +23,20 @@ namespace Flugplatzfest_Terminal.Model.Messages
             return !exists;
         }
 
-        public Chat GetTextMessages(ChatId chatId)
+        public Chat GetChat(ChatId chatId)
         {
             chatList.TryGetValue(chatId, out Chat queue);
             return queue;
+        }
+
+        public List<Chat> GetAllChats()
+        {
+            List<Chat> list = new List<Chat>();
+            foreach (ChatId key in chatList.Keys)
+            {
+                list.Add(chatList[key]);
+            }
+            return list;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Flugplatzfest_Terminal.ViewModels
         {
             NavigateBackCommand = new NavigateCommand(terminalViewNavigationService);
             SaveMenuCommand = new SaveMenuCommand(app, this);
+            //TODO TelegramToken
         }
 
         public string MenuString

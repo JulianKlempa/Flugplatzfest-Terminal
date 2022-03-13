@@ -72,6 +72,7 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
                 chatId: message.GetChatID().GetChatID(),
                 text: message.GetMessage(),
                 cancellationToken: ct);
+            events.OnMessageSent(new TextMessage(sentMessage.Text, new Messages.ChatId(InterfaceType.Telegram, sentMessage.Chat.Id), MessageDirection.outgoing));
         }
     }
 }

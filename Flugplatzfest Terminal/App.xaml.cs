@@ -19,10 +19,11 @@ namespace Flugplatzfest_Terminal
         private Menu menu;
         private readonly ChatList chatList;
         private readonly NavigationStore navigationStore;
+        private readonly Events events;
 
         public App()
         {
-            Events events = new Events();
+            events = new Events();
             events.MessageReceived += Events_MessageReceived;
 
             chatList = new ChatList();
@@ -71,9 +72,14 @@ namespace Flugplatzfest_Terminal
             return menu.GetMenu();
         }
 
+        public ChatList GetChatList()
+        {
+            return chatList;
+        }
+
         private TerminalViewModel CreateTerminalViewModel()
         {
-            return new TerminalViewModel(chatList, inter, new NavigationService(navigationStore, CreateSettingsViewModel));
+            return new TerminalViewModel(events, this, inter, new NavigationService(navigationStore, CreateSettingsViewModel));
         }
 
         private SettingsViewModel CreateSettingsViewModel()

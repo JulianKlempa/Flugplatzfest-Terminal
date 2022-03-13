@@ -4,18 +4,23 @@ namespace Flugplatzfest_Terminal.ViewModels
 {
     public class ChatViewModel : ViewModelBase
     {
-        private readonly TextMessage textMessage;
-        private readonly ChatList chatList;
+        private Chat chat;
 
-        public bool Incoming => chatList.GetTextMessages(textMessage.GetChatID()).GetLastMessage().GetMessageDirection() == MessageDirection.incoming;
-        public string LastMessageText => chatList.GetTextMessages(textMessage.GetChatID()).GetLastMessage().GetMessage();
-        public string DateTime => chatList.GetTextMessages(textMessage.GetChatID()).GetLastMessage().GetDateTime().ToString("HH:mm:ss");
-        public Chat chat => chatList.GetTextMessages(textMessage.GetChatID());
+        public bool Incoming => chat.GetLastMessage().GetMessageDirection() == MessageDirection.incoming;
+        public string LastMessageText => chat.GetLastMessage().GetMessage();
+        public string DateTime => chat.GetLastMessage().GetDateTime().ToString("HH:mm:ss");
 
-        public ChatViewModel(TextMessage textMessage, ChatList chatList)
+        public ChatViewModel(Chat chat)
         {
-            this.textMessage = textMessage;
-            this.chatList = chatList;
+            UpdateChat(chat);
         }
+
+        public void UpdateChat(Chat chat)
+        {
+            this.chat = chat;
+        }
+
+        public Chat GetChat()
+        { return chat; }
     }
 }

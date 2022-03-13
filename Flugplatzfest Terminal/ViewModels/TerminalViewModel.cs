@@ -1,9 +1,11 @@
 ﻿using Flugplatzfest_Terminal.Commands;
+using Flugplatzfest_Terminal.Model;
 using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
 using Flugplatzfest_Terminal.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Flugplatzfest_Terminal.ViewModels
@@ -20,6 +22,7 @@ namespace Flugplatzfest_Terminal.ViewModels
         public IEnumerable<ChatViewModel> Chats => chats;
 
         private readonly ObservableCollection<MessageViewModel> messages;
+        private readonly App app;
 
         public IEnumerable<MessageViewModel> Messages => messages;
 
@@ -27,21 +30,45 @@ namespace Flugplatzfest_Terminal.ViewModels
 
         public ICommand NavigateSettingsCommand { get; }
 
-        public TerminalViewModel(ChatList chatList, Interface inter, NavigationService settingsViewNavigationService)
+        public TerminalViewModel(Events events, App app, Interface inter, NavigationService settingsViewNavigationService)
         {
             chats = new ObservableCollection<ChatViewModel>();
             messages = new ObservableCollection<MessageViewModel>();
             SendCommand = new SendMessageCommand(this, inter);
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
-            UpdateChats();
+            events.MessageSent += UpdateMessages;
+            events.MessageReceived += UpdateMessages;
+            this.app = app;
+
+            GenerateChats();
         }
 
-        private void UpdateChats()
+        private void UpdateMessages(TextMessage message)
+        {
+            ChatViewModel chatViewModel = chats.FirstOrDefault(x =>
+            {
+                return x.GetChat().GetChatId().GetChatID() == message.GetChatID().GetChatID() && x.GetChat().GetChatId().GetInterfaceType() == message.GetChatID().GetInterfaceType();
+            });
+            if (chatViewModel != null)
+            {
+                chatViewModel.UpdateChat(app.GetChatList().GetChat(message.GetChatID()));
+            }
+            else
+            {
+                chats.Add(new ChatViewModel(app.GetChatList().GetChat(message.GetChatID())));
+            }
+        }
+
+        private void GenerateChats()
         {
             chats.Clear();
 
-            //foreach ()
+            foreach (Chat item in app.GetChatList().GetAllChats())
+            {
+                ChatViewModel chatViewModel = new ChatViewModel(item);
+                chats.Add(chatViewModel);
+            }
         }
 
         public string SendMessageText
@@ -59,7 +86,7 @@ namespace Flugplatzfest_Terminal.ViewModels
             set
             {
                 selectedChatViewmodel = value;
-                chat = selectedChatViewmodel?.chat;
+                chat = selectedChatViewmodel?.GetChat();
                 OnPropertyChanged(nameof(SelectedChatViewModel));
             }
         }
