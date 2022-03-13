@@ -4,22 +4,21 @@ namespace Flugplatzfest_Terminal.Model.Messages
 {
     public class ChatList
     {
-        private Dictionary<ChatId, Queue<string>> chatList;
+        private Dictionary<ChatId, Queue<TextMessage>> chatList;
 
         public ChatList()
         {
-            chatList = new Dictionary<ChatId, Queue<string>>();
+            chatList = new Dictionary<ChatId, Queue<TextMessage>>();
         }
 
         public bool AddMessage(TextMessage message)
         {
-            //TODO fix evaluation
-            bool exists = chatList.TryGetValue(message.GetChatID(), out Queue<string> queue);
+            bool exists = chatList.TryGetValue(message.GetChatID(), out Queue<TextMessage> queue);
             if (!exists)
             {
-                queue = new Queue<string>();
+                queue = new Queue<TextMessage>();
             }
-            queue.Enqueue(message.GetMessage());
+            queue.Enqueue(message);
             chatList[message.GetChatID()] = queue;
             return !exists;
         }
