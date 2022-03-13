@@ -26,11 +26,9 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
 
                 case InterfaceType.Signal:
                     throw new NotImplementedException();
-                    break;
 
                 case InterfaceType.WhatsApp:
                     throw new NotImplementedException();
-                    break;
 
                 default:
                     throw new NotImplementedException();

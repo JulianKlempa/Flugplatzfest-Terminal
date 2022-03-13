@@ -15,7 +15,6 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
         private TelegramBotClient botClient;
         private CancellationToken ct;
         private ReceiverOptions receiverOptions;
-        private ChatList chatList;
 
         public Telegram(string telegramToken, Events events)
         {

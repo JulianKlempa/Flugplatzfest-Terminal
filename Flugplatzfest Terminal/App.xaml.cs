@@ -1,6 +1,7 @@
 ﻿using Flugplatzfest_Terminal.Model;
 using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
+using Flugplatzfest_Terminal.Services;
 using Flugplatzfest_Terminal.Stores;
 using Flugplatzfest_Terminal.ViewModels;
 using System;
@@ -31,7 +32,7 @@ namespace Flugplatzfest_Terminal
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            navigationStore.CurrentViewModel = new TerminalViewModel(chatList, inter, navigationStore, this);
+            navigationStore.CurrentViewModel = CreateTerminalViewModel();
 
             MainWindow = new MainWindow()
             {
@@ -63,6 +64,16 @@ namespace Flugplatzfest_Terminal
         public string GetMenu()
         {
             return menu.GetMenu();
+        }
+
+        private TerminalViewModel CreateTerminalViewModel()
+        {
+            return new TerminalViewModel(chatList, inter, new NavigationService(navigationStore, CreateSettingsViewModel));
+        }
+
+        private SettingsViewModel CreateSettingsViewModel()
+        {
+            return new SettingsViewModel(this, new NavigationService(navigationStore, CreateTerminalViewModel));
         }
     }
 }

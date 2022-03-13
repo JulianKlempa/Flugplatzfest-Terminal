@@ -91,12 +91,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\NavigateBackCommand.cs" />
-    <Compile Include="Commands\NavigateSettingsCommand.cs" />
+    <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Commands\UseMenuCommand.cs" />
     <Compile Include="Commands\SendMessageCommand.cs" />
     <Compile Include="Model\Messages\Chat.cs" />
     <Compile Include="Model\Config.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
