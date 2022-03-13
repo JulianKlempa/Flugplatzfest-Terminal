@@ -5,6 +5,7 @@ using Flugplatzfest_Terminal.Services;
 using Flugplatzfest_Terminal.Stores;
 using Flugplatzfest_Terminal.ViewModels;
 using System;
+using System.Configuration;
 using System.Windows;
 
 namespace Flugplatzfest_Terminal
@@ -23,11 +24,14 @@ namespace Flugplatzfest_Terminal
         {
             Events events = new Events();
             events.MessageReceived += Events_MessageReceived;
-            menu = new Menu("Das ist eine Speisekarte \n1. \n2.");
-            string telegramToken = "5271526292:AAH0KJH2ULkRSWMmBZPoGeeLzpwyW0TOn1k";
+
             chatList = new ChatList();
-            inter = new Interface(telegramToken, events, chatList);
             navigationStore = new NavigationStore();
+
+            menu = new Menu(ConfigurationManager.AppSettings.Get("Menu"));
+            string telegramToken = ConfigurationManager.AppSettings.Get("TelegramToken");
+
+            inter = new Interface(telegramToken, events, chatList);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -56,8 +60,9 @@ namespace Flugplatzfest_Terminal
             Console.WriteLine(message.GetMessage());
         }
 
-        public void SetMenu(string menuString)
+        public void SaveMenu(string menuString)
         {
+            ConfigurationManager.AppSettings.Set("Menu", menuString);
             menu.SetMenu(menuString);
         }
 

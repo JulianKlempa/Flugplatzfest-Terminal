@@ -4,12 +4,12 @@ using System.Windows;
 
 namespace Flugplatzfest_Terminal.Commands
 {
-    public class UseMenuCommand : CommandBase
+    public class SaveMenuCommand : CommandBase
     {
         private App app;
         private readonly SettingsViewModel settingsViewModel;
 
-        public UseMenuCommand(App app, SettingsViewModel settingsViewModel)
+        public SaveMenuCommand(App app, SettingsViewModel settingsViewModel)
         {
             this.app = app;
             this.settingsViewModel = settingsViewModel;
@@ -28,8 +28,8 @@ namespace Flugplatzfest_Terminal.Commands
         {
             if (!string.IsNullOrEmpty(settingsViewModel.MenuString))
             {
-                app.SetMenu(settingsViewModel.MenuString);
-                MessageBox.Show("Speisekarte wurde gesetzt.");
+                app.SaveMenu(settingsViewModel.MenuString);
+                MessageBox.Show("Speisekarte wurde gespeichert.");
             }
         }
 

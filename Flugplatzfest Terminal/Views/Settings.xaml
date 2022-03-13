@@ -30,11 +30,9 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Content="Öffnen" />
-                    <Button Grid.Column="1" Content="Speichern" />
-                    <Button Grid.Column="2" Content="Übernehmen" Command="{Binding UseMenuCommand}" />
+                    <Button Grid.Column="2" Content="Speichern" Command="{Binding SaveMenuCommand}" />
                 </Grid>
             </Grid>
             <Grid Grid.Column="1">

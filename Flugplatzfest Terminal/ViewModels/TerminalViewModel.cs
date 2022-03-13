@@ -34,12 +34,14 @@ namespace Flugplatzfest_Terminal.ViewModels
             SendCommand = new SendMessageCommand(this, inter);
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
-            TextMessage message = new TextMessage("Test", new ChatId(InterfaceType.Telegram, 187), MessageDirection.incoming);
-            chatList.AddMessage(message);
-            chats.Add(new ChatViewModel(message, chatList));
-            TextMessage message2 = new TextMessage("Test", new ChatId(InterfaceType.Telegram, 259), MessageDirection.outgoing);
-            chatList.AddMessage(message2);
-            chats.Add(new ChatViewModel(message2, chatList));
+            UpdateChats();
+        }
+
+        private void UpdateChats()
+        {
+            chats.Clear();
+
+            //foreach ()
         }
 
         public string SendMessageText

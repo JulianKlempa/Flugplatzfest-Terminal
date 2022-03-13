@@ -55,6 +55,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -92,7 +93,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\UseMenuCommand.cs" />
+    <Compile Include="Commands\SaveMenuCommand.cs" />
     <Compile Include="Commands\SendMessageCommand.cs" />
     <Compile Include="Model\Messages\Chat.cs" />
     <Compile Include="Model\Config.cs" />
