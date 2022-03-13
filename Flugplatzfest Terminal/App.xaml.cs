@@ -1,6 +1,7 @@
 ﻿using Flugplatzfest_Terminal.Model;
 using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
+using Flugplatzfest_Terminal.Stores;
 using Flugplatzfest_Terminal.ViewModels;
 using System;
 using System.Windows;
@@ -12,22 +13,29 @@ namespace Flugplatzfest_Terminal
     /// </summary>
     public partial class App : Application
     {
-        private Interface interfaces;
-        private Speisekarte speisekarte;
-        private ChatList chatList;
+        private readonly Interface inter;
+        private readonly Speisekarte speisekarte;
+        private readonly ChatList chatList;
+        private readonly NavigationStore navigationStore;
 
-        protected override void OnStartup(StartupEventArgs e)
+        public App()
         {
             Events events = new Events();
             events.MessageReceived += Events_MessageReceived;
             speisekarte = new Speisekarte("Das ist eine Speisekarte \n1. \n2.");
             string telegramToken = "5271526292:AAH0KJH2ULkRSWMmBZPoGeeLzpwyW0TOn1k";
             chatList = new ChatList();
-            interfaces = new Interface(telegramToken, events, chatList);
+            inter = new Interface(telegramToken, events, chatList);
+            navigationStore = new NavigationStore();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            navigationStore.CurrentViewModel = new TerminalViewModel(chatList, inter, navigationStore);
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(chatList, interfaces)
+                DataContext = new MainViewModel(navigationStore)
             };
 
             MainWindow.Show();
@@ -38,11 +46,11 @@ namespace Flugplatzfest_Terminal
         {
             if (chatList.AddMessage(message))
             {
-                interfaces.SendMessage(new TextMessage(speisekarte.GetSpeisekarte(), message.GetChatID(), MessageDirection.outgoing));
+                inter.SendMessage(new TextMessage(speisekarte.GetSpeisekarte(), message.GetChatID(), MessageDirection.outgoing));
             }
             else
             {
-                interfaces.SendMessage(message);
+                inter.SendMessage(message);
             }
             Console.WriteLine(message.GetMessage());
         }

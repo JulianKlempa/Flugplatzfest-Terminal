@@ -1,26 +1,43 @@
 ﻿using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
+using Flugplatzfest_Terminal.ViewModels;
 
 namespace Flugplatzfest_Terminal.Commands
 {
     public class SendMessageCommand : CommandBase
     {
         private Interface inter;
+        private TerminalViewModel terminalViewModel;
 
-        private string message;
-
-        private Chat chat;
-
-        public SendMessageCommand(Interface inter, ref string message, ref Chat chat)
+        public SendMessageCommand(TerminalViewModel terminalViewModel, Interface inter)
         {
             this.inter = inter;
-            this.message = message;
-            this.chat = chat;
+            this.terminalViewModel = terminalViewModel;
+            terminalViewModel.PropertyChanged += TerminalViewModel_PropertyChanged;
+        }
+
+        private void TerminalViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(terminalViewModel.SendMessageText):
+                case nameof(terminalViewModel.SelectedChatViewModel):
+                    OnCanExecuteChanged();
+                    break;
+            }
         }
 
         public override void Execute(object parameter)
         {
-            inter.SendMessage(new TextMessage(message, chat.GetLastMessage().GetChatID(), MessageDirection.outgoing));
+            if (terminalViewModel.GetSendMessage() != null && terminalViewModel.GetSendMessage() != "" && terminalViewModel.GetCurrentChat() != null)
+            {
+                inter.SendMessage(new TextMessage(terminalViewModel.GetSendMessage(), terminalViewModel.GetCurrentChat().GetChatId(), MessageDirection.outgoing));
+            }
+        }
+
+        public override bool CanExecute(object parameter)
+        {
+            return !string.IsNullOrEmpty(terminalViewModel.GetSendMessage()) && terminalViewModel.GetCurrentChat() != null && base.CanExecute(parameter);
         }
     }
 }

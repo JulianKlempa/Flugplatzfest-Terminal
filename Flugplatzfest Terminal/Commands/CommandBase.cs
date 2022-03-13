@@ -14,7 +14,7 @@ namespace Flugplatzfest_Terminal.Commands
 
         public abstract void Execute(object parameter);
 
-        protected void OnExecuteChanged()
+        protected void OnCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }

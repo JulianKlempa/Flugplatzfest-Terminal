@@ -1,6 +1,7 @@
 ﻿using Flugplatzfest_Terminal.Commands;
 using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
+using Flugplatzfest_Terminal.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -24,11 +25,14 @@ namespace Flugplatzfest_Terminal.ViewModels
 
         public ICommand SendCommand { get; }
 
-        public TerminalViewModel(ChatList chatList, Interface inter)
+        public ICommand NavigateSettingsCommand { get; }
+
+        public TerminalViewModel(ChatList chatList, Interface inter, NavigationStore navigationStore)
         {
             chats = new ObservableCollection<ChatViewModel>();
             messages = new ObservableCollection<MessageViewModel>();
-            SendCommand = new SendMessageCommand(inter, ref sendMessageText, ref chat);
+            SendCommand = new SendMessageCommand(this, inter);
+            NavigateSettingsCommand = new NavigateSettingsCommand(navigationStore);
 
             TextMessage message = new TextMessage("Test", new ChatId(InterfaceType.Telegram, 187), MessageDirection.incoming);
             chatList.AddMessage(message);
@@ -53,9 +57,19 @@ namespace Flugplatzfest_Terminal.ViewModels
             set
             {
                 selectedChatViewmodel = value;
-                chat = selectedChatViewmodel.chat;
+                chat = selectedChatViewmodel?.chat;
                 OnPropertyChanged(nameof(SelectedChatViewModel));
             }
+        }
+
+        public Chat GetCurrentChat()
+        {
+            return chat;
+        }
+
+        public string GetSendMessage()
+        {
+            return sendMessageText;
         }
     }
 }

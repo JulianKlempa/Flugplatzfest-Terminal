@@ -1,15 +1,22 @@
-﻿using Flugplatzfest_Terminal.Model.Interfaces;
-using Flugplatzfest_Terminal.Model.Messages;
+﻿using Flugplatzfest_Terminal.Stores;
 
 namespace Flugplatzfest_Terminal.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public ViewModelBase CurrentViewModel { get; }
+        private NavigationStore navigationStore;
 
-        public MainViewModel(ChatList chatList, Interface inter)
+        public ViewModelBase CurrentViewModel => navigationStore.CurrentViewModel;
+
+        public MainViewModel(NavigationStore navigationStore)
         {
-            CurrentViewModel = new TerminalViewModel(chatList, inter);
+            this.navigationStore = navigationStore;
+            navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+        }
+
+        private void OnCurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
         }
     }
 }

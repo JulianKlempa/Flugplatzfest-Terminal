@@ -6,6 +6,7 @@ namespace Flugplatzfest_Terminal.Model.Messages
     {
         private Queue<TextMessage> textMessages;
         private TextMessage lastMessage;
+        private ChatId chatId;
 
         public Chat()
         {
@@ -19,8 +20,14 @@ namespace Flugplatzfest_Terminal.Model.Messages
 
         public void AddMessage(TextMessage message)
         {
+            chatId = message.GetChatID();
             textMessages.Enqueue(message);
             lastMessage = message;
+        }
+
+        public ChatId GetChatId()
+        {
+            return chatId;
         }
     }
 }
