@@ -63,8 +63,13 @@ namespace Flugplatzfest_Terminal
 
         public void SaveMenu(string menuString)
         {
-            ConfigurationManager.AppSettings.Set("Menu", menuString);
             menu.SetMenu(menuString);
+
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings["Menu"].Value = menuString;
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
 
         public string GetMenu()
