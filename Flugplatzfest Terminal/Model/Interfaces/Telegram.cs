@@ -11,15 +11,13 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
 {
     internal class Telegram
     {
-        private Events events;
         private TelegramBotClient botClient;
         private CancellationToken ct;
         private ReceiverOptions receiverOptions;
+        private readonly Events events;
 
         public Telegram(string telegramToken, Events events)
         {
-            this.events = events;
-
             botClient = new TelegramBotClient(telegramToken);
 
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -32,6 +30,7 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
             };
 
             StartReceiving();
+            this.events = events;
         }
 
         private async Task StartReceiving()
@@ -72,7 +71,6 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
                 chatId: message.GetChatID().GetChatID(),
                 text: message.GetMessage(),
                 cancellationToken: ct);
-            events.OnMessageSent(new TextMessage(sentMessage.Text, new Messages.ChatId(InterfaceType.Telegram, sentMessage.Chat.Id), MessageDirection.outgoing));
         }
     }
 }

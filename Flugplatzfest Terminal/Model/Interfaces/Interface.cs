@@ -7,11 +7,13 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
     {
         public InterfaceType interfaceType;
         private Telegram telegram;
+        private readonly Events events;
         private ChatList chatList;
 
         public Interface(string telegramToken, Events events, ChatList chatList)
         {
             telegram = new Telegram(telegramToken, events);
+            this.events = events;
             this.chatList = chatList;
         }
 
@@ -34,6 +36,7 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
                     throw new NotImplementedException();
             }
             chatList.AddMessage(message);
+            events.OnMessageSent(message);
         }
     }
 }

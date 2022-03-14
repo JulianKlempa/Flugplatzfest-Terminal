@@ -3,6 +3,7 @@ using Flugplatzfest_Terminal.Model;
 using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
 using Flugplatzfest_Terminal.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -46,18 +47,21 @@ namespace Flugplatzfest_Terminal.ViewModels
 
         private void UpdateMessages(TextMessage message)
         {
-            ChatViewModel chatViewModel = chats.FirstOrDefault(x =>
+            App.Current.Dispatcher.Invoke((Action)delegate
             {
-                return x.GetChat().GetChatId().GetChatID() == message.GetChatID().GetChatID() && x.GetChat().GetChatId().GetInterfaceType() == message.GetChatID().GetInterfaceType();
+                ChatViewModel chatViewModel = chats.FirstOrDefault(x =>
+                {
+                    return x.GetChat().GetChatId().GetChatID() == message.GetChatID().GetChatID() && x.GetChat().GetChatId().GetInterfaceType() == message.GetChatID().GetInterfaceType();
+                });
+                if (chatViewModel != null)
+                {
+                    chatViewModel.UpdateChat(app.GetChatList().GetChat(message.GetChatID()));
+                }
+                else
+                {
+                    chats.Add(new ChatViewModel(app.GetChatList().GetChat(message.GetChatID())));
+                }
             });
-            if (chatViewModel != null)
-            {
-                chatViewModel.UpdateChat(app.GetChatList().GetChat(message.GetChatID()));
-            }
-            else
-            {
-                chats.Add(new ChatViewModel(app.GetChatList().GetChat(message.GetChatID())));
-            }
         }
 
         private void GenerateChats()
