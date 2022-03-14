@@ -1,7 +1,6 @@
 ﻿using Flugplatzfest_Terminal.Commands;
 using Flugplatzfest_Terminal.Model.Messages;
 using Flugplatzfest_Terminal.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -19,8 +18,8 @@ namespace Flugplatzfest_Terminal.ViewModels
         private ObservableCollection<ChatViewModel> chats;
         private ObservableCollection<MessageViewModel> messages;
 
-        public IEnumerable<MessageViewModel> Messages => messages;
         public IEnumerable<ChatViewModel> Chats => chats;
+        public IEnumerable<MessageViewModel> Messages => messages;
 
         public ICommand SendCommand { get; }
         public ICommand NavigateSettingsCommand { get; }
@@ -32,8 +31,9 @@ namespace Flugplatzfest_Terminal.ViewModels
             SendCommand = new SendMessageCommand(this, app.GetInterface());
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
-            app.GetEvents().MessageSent += UpdateChats;
+            app.GetEvents().ChatCreated += ChatCreated;
             app.GetEvents().MessageReceived += UpdateChats;
+            app.GetEvents().MessageSent += UpdateChats;
             this.app = app;
 
             GenerateChats();
@@ -41,22 +41,21 @@ namespace Flugplatzfest_Terminal.ViewModels
 
         private void UpdateChats(TextMessage message)
         {
-            App.Current.Dispatcher.Invoke((Action)delegate
+            App.Current.Dispatcher.Invoke(delegate
             {
-                ChatViewModel chatViewModel = chats.FirstOrDefault(x =>
-                {
-                    return x.GetChat().GetChatId().GetChatID() == message.GetChatID().GetChatID() && x.GetChat().GetChatId().GetInterfaceType() == message.GetChatID().GetInterfaceType();
-                });
-                bool isSelected = selectedChatViewmodel == chatViewModel;
-                if (chatViewModel != null)
-                {
-                    chatViewModel.UpdateChat(app.GetChatList().GetChat(message.GetChatID()));
-                }
-                else
-                {
-                    chats.Add(new ChatViewModel(app.GetChatList().GetChat(message.GetChatID())));
-                }
+                Chat chat = app.GetChatList().GetChat(message.GetChatID());
+                ChatViewModel chatViewModel = chats.FirstOrDefault(x => x.GetChat().GetChatId().Equals(message.GetChatID()));
+                chatViewModel.UpdateChat(chat);
+                OnPropertyChanged(nameof(chats));
                 UpdateMessages();
+            });
+        }
+
+        private void ChatCreated(Chat chat)
+        {
+            App.Current.Dispatcher.Invoke(delegate
+            {
+                chats.Add(new ChatViewModel(chat));
             });
         }
 

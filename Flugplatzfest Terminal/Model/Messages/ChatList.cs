@@ -17,13 +17,14 @@ namespace Flugplatzfest_Terminal.Model.Messages
 
         public void AddMessage(TextMessage message)
         {
-            bool exists = chatList.TryGetValue(message.GetChatID(), out Chat queue);
+            bool exists = chatList.TryGetValue(message.GetChatID(), out Chat chat);
             if (!exists)
             {
-                queue = new Chat();
+                chat = new Chat();
+                app.GetEvents().OnChatCreated(chat);
             }
-            queue.AddMessage(message);
-            chatList[message.GetChatID()] = queue;
+            chat.AddMessage(message);
+            chatList[message.GetChatID()] = chat;
             if (message.GetMessageDirection() == MessageDirection.incoming) app.MessageReceived(message);
         }
 
