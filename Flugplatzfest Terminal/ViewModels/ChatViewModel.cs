@@ -1,4 +1,5 @@
 ﻿using Flugplatzfest_Terminal.Model.Messages;
+using System;
 
 namespace Flugplatzfest_Terminal.ViewModels
 {
@@ -7,8 +8,8 @@ namespace Flugplatzfest_Terminal.ViewModels
         private Chat chat;
 
         public bool Incoming => chat.GetLastMessage().GetMessageDirection() == MessageDirection.incoming;
-        public string LastMessageText => chat.GetLastMessage().GetMessage();
-        public string DateTime => chat.GetLastMessage().GetDateTime().ToString("HH:mm:ss");
+        public string LastMessageText => chat.GetLastMessage().GetMessage().Contains(Environment.NewLine) ? chat.GetLastMessage().GetMessage().Substring(0, chat.GetLastMessage().GetMessage().IndexOf(Environment.NewLine)) + " ..." : chat.GetLastMessage().GetMessage();
+        public string DateTime => chat.GetLastMessage().GetDateTime().ToString("HH:mm");
 
         public ChatViewModel(Chat chat)
         {
