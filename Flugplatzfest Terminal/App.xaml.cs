@@ -16,7 +16,7 @@ namespace Flugplatzfest_Terminal
     public partial class App : Application
     {
         private readonly Interface inter;
-        private Menu menu;
+        private readonly Menu menu;
         private readonly ChatList chatList;
         private readonly NavigationStore navigationStore;
         private readonly Events events;

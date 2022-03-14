@@ -4,6 +4,7 @@ using Flugplatzfest_Terminal.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Flugplatzfest_Terminal.ViewModels
@@ -15,28 +16,28 @@ namespace Flugplatzfest_Terminal.ViewModels
         private Chat chat;
         private ChatViewModel selectedChatViewmodel;
 
-        private ObservableCollection<ChatViewModel> chats;
-        private ObservableCollection<MessageViewModel> messages;
+        public ObservableCollection<ChatViewModel> Chats { get; set; }
+        public ObservableCollection<MessageViewModel> Messages { get; set; }
 
-        public IEnumerable<ChatViewModel> Chats => chats;
-        public IEnumerable<MessageViewModel> Messages => messages;
+        private readonly List<ChatViewModel> chats;
 
         public ICommand SendCommand { get; }
         public ICommand NavigateSettingsCommand { get; }
 
         public TerminalViewModel(App app, NavigationService settingsViewNavigationService)
         {
-            chats = new ObservableCollection<ChatViewModel>();
-            messages = new ObservableCollection<MessageViewModel>();
+            this.app = app;
+            chats = new List<ChatViewModel>();
+            GenerateChats();
+
+            Chats = new ObservableCollection<ChatViewModel>(chats);
+            Messages = new ObservableCollection<MessageViewModel>();
+
             SendCommand = new SendMessageCommand(this, app.GetInterface());
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
-            app.GetEvents().ChatCreated += ChatCreated;
             app.GetEvents().MessageReceived += UpdateChats;
             app.GetEvents().MessageSent += UpdateChats;
-            this.app = app;
-
-            GenerateChats();
         }
 
         private void UpdateChats(TextMessage message)
@@ -44,18 +45,17 @@ namespace Flugplatzfest_Terminal.ViewModels
             App.Current.Dispatcher.Invoke(delegate
             {
                 Chat chat = app.GetChatList().GetChat(message.GetChatID());
-                ChatViewModel chatViewModel = chats.FirstOrDefault(x => x.GetChat().GetChatId().Equals(message.GetChatID()));
-                chatViewModel.UpdateChat(chat);
-                OnPropertyChanged(nameof(chats));
+                ChatViewModel chatViewModel = Chats.FirstOrDefault(x => x.GetChat().GetChatId().Equals(message.GetChatID()));
+                if (chatViewModel != null)
+                {
+                    chatViewModel.UpdateChat(chat);
+                }
+                else
+                {
+                    Chats.Add(new ChatViewModel(chat));
+                }
+                CollectionViewSource.GetDefaultView(Chats).Refresh();
                 UpdateMessages();
-            });
-        }
-
-        private void ChatCreated(Chat chat)
-        {
-            App.Current.Dispatcher.Invoke(delegate
-            {
-                chats.Add(new ChatViewModel(chat));
             });
         }
 
@@ -72,14 +72,14 @@ namespace Flugplatzfest_Terminal.ViewModels
 
         private void UpdateMessages()
         {
-            messages.Clear();
+            Messages.Clear();
 
             Queue<TextMessage> textMessages = chat?.GetAllMessages();
             if (textMessages != null)
             {
                 foreach (TextMessage message in textMessages)
                 {
-                    messages.Add(new MessageViewModel(message));
+                    Messages.Add(new MessageViewModel(message));
                 }
             }
         }

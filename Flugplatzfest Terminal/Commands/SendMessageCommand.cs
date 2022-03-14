@@ -6,8 +6,8 @@ namespace Flugplatzfest_Terminal.Commands
 {
     public class SendMessageCommand : CommandBase
     {
-        private Interface inter;
-        private TerminalViewModel terminalViewModel;
+        private readonly Interface inter;
+        private readonly TerminalViewModel terminalViewModel;
 
         public SendMessageCommand(TerminalViewModel terminalViewModel, Interface inter)
         {
