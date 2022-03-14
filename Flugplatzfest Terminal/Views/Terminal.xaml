@@ -37,8 +37,9 @@
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock>
+                        <TextBlock VerticalAlignment="Center">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
                                     <Style.Triggers>
@@ -53,7 +54,8 @@
                             </TextBlock.Style>
                         </TextBlock>
                         <TextBlock Grid.Column="1" Text="{Binding LastMessageText}" />
-                        <TextBlock Grid.Column="2" Text="{Binding DateTime}" FontSize="10" VerticalAlignment="Bottom" />
+                        <TextBlock Grid.Column="2" Text="{Binding InterfaceType}" />
+                        <TextBlock Grid.Column="3" Text="{Binding DateTime}" FontSize="7" VerticalAlignment="Bottom" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
