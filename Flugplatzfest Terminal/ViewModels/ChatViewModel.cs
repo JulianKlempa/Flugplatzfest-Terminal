@@ -13,6 +13,7 @@ namespace Flugplatzfest_Terminal.ViewModels
         public ChatViewModel(Chat chat)
         {
             UpdateChat(chat);
+            OnPropertyChanged(nameof(ChatViewModel));
         }
 
         public void UpdateChat(Chat chat)

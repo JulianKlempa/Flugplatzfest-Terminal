@@ -5,13 +5,17 @@ namespace Flugplatzfest_Terminal.Model.Messages
     public class ChatList
     {
         private Dictionary<ChatId, Chat> chatList;
+        private readonly App app;
 
-        public ChatList()
+        public ChatList(App app)
         {
             chatList = new Dictionary<ChatId, Chat>();
+            app.GetEvents().MessageSent += AddMessage;
+            app.GetEvents().MessageReceived += AddMessage;
+            this.app = app;
         }
 
-        public bool AddMessage(TextMessage message)
+        public void AddMessage(TextMessage message)
         {
             bool exists = chatList.TryGetValue(message.GetChatID(), out Chat queue);
             if (!exists)
@@ -20,7 +24,7 @@ namespace Flugplatzfest_Terminal.Model.Messages
             }
             queue.AddMessage(message);
             chatList[message.GetChatID()] = queue;
-            return !exists;
+            if (message.GetMessageDirection() == MessageDirection.incoming) app.MessageReceived(message);
         }
 
         public Chat GetChat(ChatId chatId)

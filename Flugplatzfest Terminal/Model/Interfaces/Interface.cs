@@ -19,7 +19,6 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
 
         public void SendMessage(TextMessage message)
         {
-            if (message.GetMessageDirection() == MessageDirection.incoming) message.SwitchMessageDirection();
             switch (message.GetChatID().GetInterfaceType())
             {
                 case InterfaceType.Telegram:
@@ -35,7 +34,6 @@ namespace Flugplatzfest_Terminal.Model.Interfaces
                 default:
                     throw new NotImplementedException();
             }
-            chatList.AddMessage(message);
             events.OnMessageSent(message);
         }
     }

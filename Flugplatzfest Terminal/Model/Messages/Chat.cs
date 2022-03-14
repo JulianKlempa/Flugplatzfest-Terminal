@@ -18,6 +18,11 @@ namespace Flugplatzfest_Terminal.Model.Messages
             return lastMessage;
         }
 
+        public Queue<TextMessage> GetAllMessages()
+        {
+            return textMessages;
+        }
+
         public void AddMessage(TextMessage message)
         {
             chatId = message.GetChatID();

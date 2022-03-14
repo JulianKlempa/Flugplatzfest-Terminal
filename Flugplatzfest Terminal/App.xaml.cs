@@ -24,9 +24,8 @@ namespace Flugplatzfest_Terminal
         public App()
         {
             events = new Events();
-            events.MessageReceived += Events_MessageReceived;
 
-            chatList = new ChatList();
+            chatList = new ChatList(this);
             navigationStore = new NavigationStore();
 
             menu = new Menu(ConfigurationManager.AppSettings.Get("Menu"));
@@ -48,15 +47,15 @@ namespace Flugplatzfest_Terminal
             base.OnStartup(e);
         }
 
-        private void Events_MessageReceived(TextMessage message)
+        public void MessageReceived(TextMessage message)
         {
-            if (chatList.AddMessage(message) || message.GetMessage().ToLower().Contains("karte"))
+            if (chatList.GetChat(message.GetChatID()).GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
             {
                 inter.SendMessage(new TextMessage(menu.GetMenu(), message.GetChatID(), MessageDirection.outgoing));
             }
             else
             {
-                inter.SendMessage(message);
+                inter.SendMessage(new TextMessage(message.GetMessage(), message.GetChatID(), MessageDirection.outgoing));
             }
             Console.WriteLine(message.GetMessage());
         }
@@ -82,9 +81,19 @@ namespace Flugplatzfest_Terminal
             return chatList;
         }
 
+        public Interface GetInterface()
+        {
+            return inter;
+        }
+
+        public Events GetEvents()
+        {
+            return events;
+        }
+
         private TerminalViewModel CreateTerminalViewModel()
         {
-            return new TerminalViewModel(events, this, inter, new NavigationService(navigationStore, CreateSettingsViewModel));
+            return new TerminalViewModel(this, new NavigationService(navigationStore, CreateSettingsViewModel));
         }
 
         private SettingsViewModel CreateSettingsViewModel()

@@ -1,6 +1,4 @@
 ﻿using Flugplatzfest_Terminal.Commands;
-using Flugplatzfest_Terminal.Model;
-using Flugplatzfest_Terminal.Model.Interfaces;
 using Flugplatzfest_Terminal.Model.Messages;
 using Flugplatzfest_Terminal.Services;
 using System;
@@ -13,39 +11,35 @@ namespace Flugplatzfest_Terminal.ViewModels
 {
     public class TerminalViewModel : ViewModelBase
     {
+        private readonly App app;
         private string sendMessageText;
-
         private Chat chat;
-
         private ChatViewModel selectedChatViewmodel;
 
-        private readonly ObservableCollection<ChatViewModel> chats;
-        public IEnumerable<ChatViewModel> Chats => chats;
-
-        private readonly ObservableCollection<MessageViewModel> messages;
-        private readonly App app;
+        private ObservableCollection<ChatViewModel> chats;
+        private ObservableCollection<MessageViewModel> messages;
 
         public IEnumerable<MessageViewModel> Messages => messages;
+        public IEnumerable<ChatViewModel> Chats => chats;
 
         public ICommand SendCommand { get; }
-
         public ICommand NavigateSettingsCommand { get; }
 
-        public TerminalViewModel(Events events, App app, Interface inter, NavigationService settingsViewNavigationService)
+        public TerminalViewModel(App app, NavigationService settingsViewNavigationService)
         {
             chats = new ObservableCollection<ChatViewModel>();
             messages = new ObservableCollection<MessageViewModel>();
-            SendCommand = new SendMessageCommand(this, inter);
+            SendCommand = new SendMessageCommand(this, app.GetInterface());
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
-            events.MessageSent += UpdateMessages;
-            events.MessageReceived += UpdateMessages;
+            app.GetEvents().MessageSent += UpdateChats;
+            app.GetEvents().MessageReceived += UpdateChats;
             this.app = app;
 
             GenerateChats();
         }
 
-        private void UpdateMessages(TextMessage message)
+        private void UpdateChats(TextMessage message)
         {
             App.Current.Dispatcher.Invoke((Action)delegate
             {
@@ -53,6 +47,7 @@ namespace Flugplatzfest_Terminal.ViewModels
                 {
                     return x.GetChat().GetChatId().GetChatID() == message.GetChatID().GetChatID() && x.GetChat().GetChatId().GetInterfaceType() == message.GetChatID().GetInterfaceType();
                 });
+                bool isSelected = selectedChatViewmodel == chatViewModel;
                 if (chatViewModel != null)
                 {
                     chatViewModel.UpdateChat(app.GetChatList().GetChat(message.GetChatID()));
@@ -61,6 +56,7 @@ namespace Flugplatzfest_Terminal.ViewModels
                 {
                     chats.Add(new ChatViewModel(app.GetChatList().GetChat(message.GetChatID())));
                 }
+                UpdateMessages();
             });
         }
 
@@ -72,6 +68,20 @@ namespace Flugplatzfest_Terminal.ViewModels
             {
                 ChatViewModel chatViewModel = new ChatViewModel(item);
                 chats.Add(chatViewModel);
+            }
+        }
+
+        private void UpdateMessages()
+        {
+            messages.Clear();
+
+            Queue<TextMessage> textMessages = chat?.GetAllMessages();
+            if (textMessages != null)
+            {
+                foreach (TextMessage message in textMessages)
+                {
+                    messages.Add(new MessageViewModel(message));
+                }
             }
         }
 
@@ -91,6 +101,7 @@ namespace Flugplatzfest_Terminal.ViewModels
             {
                 selectedChatViewmodel = value;
                 chat = selectedChatViewmodel?.GetChat();
+                UpdateMessages();
                 OnPropertyChanged(nameof(SelectedChatViewModel));
             }
         }
