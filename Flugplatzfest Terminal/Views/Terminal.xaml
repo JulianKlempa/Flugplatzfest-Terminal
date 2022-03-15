@@ -55,7 +55,7 @@
                         </TextBlock>
                         <TextBlock Grid.Column="1" Text="{Binding LastMessageText}" />
                         <TextBlock Grid.Column="2" Text="{Binding InterfaceType}" />
-                        <TextBlock Grid.Column="3" Text="{Binding DateTime}" FontSize="7" VerticalAlignment="Bottom" />
+                        <TextBlock Grid.Column="3" Text="{Binding DateTime}" FontSize="10" VerticalAlignment="Bottom" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
