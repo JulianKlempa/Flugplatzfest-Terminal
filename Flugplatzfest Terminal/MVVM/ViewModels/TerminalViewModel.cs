@@ -36,16 +36,14 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
             SendCommand = new SendMessageCommand(this, app.GetInterface());
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
-            app.GetEvents().MessageReceived += UpdateChats;
-            app.GetEvents().MessageSent += UpdateChats;
+            app.GetEvents().ChatUpdated += UpdateChats;
         }
 
-        private void UpdateChats(TextMessage message)
+        private void UpdateChats(Chat chat)
         {
             App.Current.Dispatcher.Invoke(delegate
             {
-                Chat chat = app.GetChatList().GetChat(message.GetChatID());
-                ChatViewModel chatViewModel = Chats.FirstOrDefault(x => x.GetChat().GetChatId().Equals(message.GetChatID()));
+                ChatViewModel chatViewModel = Chats.FirstOrDefault(x => x.GetChat() != null && x.GetChat().GetChatId().Equals(chat.GetChatId()));
                 if (chatViewModel != null)
                 {
                     chatViewModel.UpdateChat(chat);

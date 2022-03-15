@@ -49,7 +49,7 @@ namespace Flugplatzfest_Terminal
 
         public void MessageReceived(TextMessage message)
         {
-            if (chatList.GetChat(message.GetChatID()).GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
+            if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
             {
                 inter.SendMessage(new TextMessage(menu.GetMenu(), message.GetChatID(), MessageDirection.outgoing));
             }

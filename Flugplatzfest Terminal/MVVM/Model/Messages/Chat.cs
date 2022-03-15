@@ -11,8 +11,8 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
         public Chat(TextMessage textMessage)
         {
             chatId = textMessage.GetChatID();
-            AddMessage(textMessage);
             textMessages = new Queue<TextMessage>();
+            AddMessage(textMessage);
         }
 
         public TextMessage GetLastMessage()

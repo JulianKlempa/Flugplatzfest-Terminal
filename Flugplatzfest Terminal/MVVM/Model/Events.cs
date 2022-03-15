@@ -6,7 +6,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
 
     public delegate void NotifyMessageSent(TextMessage message);
 
-    public delegate void NotifyChatCreated(Chat chat);
+    public delegate void NotifyChatUpdated(Chat chat);
 
     public class Events
     {
@@ -14,7 +14,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
 
         public event NotifyMessageSent MessageSent;
 
-        public event NotifyChatCreated ChatCreated;
+        public event NotifyChatUpdated ChatUpdated;
 
         public virtual void OnMessageReceived(TextMessage message)
         {
@@ -26,9 +26,9 @@ namespace Flugplatzfest_Terminal.MVVM.Model
             MessageSent?.Invoke(message);
         }
 
-        public virtual void OnChatCreated(Chat chat)
+        public virtual void OnChatUpdated(Chat chat)
         {
-            ChatCreated?.Invoke(chat);
+            ChatUpdated?.Invoke(chat);
         }
     }
 }

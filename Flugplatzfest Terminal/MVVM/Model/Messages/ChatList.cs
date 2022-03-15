@@ -21,7 +21,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
             if (!exists)
             {
                 chat = new Chat(message);
-                app.GetEvents().OnChatCreated(chat);
+                chatList.Add(message.GetChatID(), chat);
             }
             else
             {
@@ -29,6 +29,8 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
                 chatList[message.GetChatID()] = chat;
             }
             if (message.GetMessageDirection() == MessageDirection.incoming) app.MessageReceived(message);
+
+            app.GetEvents().OnChatUpdated(chat);
         }
 
         public Chat GetChat(ChatId chatId)
