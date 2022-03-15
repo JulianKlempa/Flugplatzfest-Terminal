@@ -31,7 +31,7 @@ namespace Flugplatzfest_Terminal
             menu = new Menu(ConfigurationManager.AppSettings.Get("Menu"));
             string telegramToken = ConfigurationManager.AppSettings.Get("TelegramToken");
 
-            inter = new Interface(telegramToken, events, chatList);
+            inter = new Interface(telegramToken, events);
         }
 
         protected override void OnStartup(StartupEventArgs e)

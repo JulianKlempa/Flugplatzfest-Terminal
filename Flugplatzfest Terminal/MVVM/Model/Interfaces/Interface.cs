@@ -6,15 +6,13 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Interfaces
     public class Interface
     {
         public InterfaceType interfaceType;
-        private Telegram telegram;
+        private readonly Telegram telegram;
         private readonly Events events;
-        private ChatList chatList;
 
-        public Interface(string telegramToken, Events events, ChatList chatList)
+        public Interface(string telegramToken, Events events)
         {
             telegram = new Telegram(telegramToken, events);
             this.events = events;
-            this.chatList = chatList;
         }
 
         public void SendMessage(TextMessage message)

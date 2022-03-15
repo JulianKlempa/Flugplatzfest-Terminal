@@ -6,7 +6,7 @@ namespace Flugplatzfest_Terminal.MVVM.Services
 {
     public class NavigationService
     {
-        private NavigationStore navigationStore;
+        private readonly NavigationStore navigationStore;
         private readonly Func<ViewModelBase> createViewModel;
 
         public NavigationService(NavigationStore navigationStore, Func<ViewModelBase> createViewModel)

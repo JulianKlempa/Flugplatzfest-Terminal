@@ -6,7 +6,7 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 {
     public class SaveMenuCommand : CommandBase
     {
-        private App app;
+        private readonly App app;
         private readonly SettingsViewModel settingsViewModel;
 
         public SaveMenuCommand(App app, SettingsViewModel settingsViewModel)

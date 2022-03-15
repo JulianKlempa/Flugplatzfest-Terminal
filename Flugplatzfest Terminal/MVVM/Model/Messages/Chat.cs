@@ -4,12 +4,14 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
 {
     public class Chat
     {
-        private Queue<TextMessage> textMessages;
+        private readonly Queue<TextMessage> textMessages;
         private TextMessage lastMessage;
-        private ChatId chatId;
+        private readonly ChatId chatId;
 
-        public Chat()
+        public Chat(TextMessage textMessage)
         {
+            chatId = textMessage.GetChatID();
+            AddMessage(textMessage);
             textMessages = new Queue<TextMessage>();
         }
 
@@ -25,7 +27,6 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
 
         public void AddMessage(TextMessage message)
         {
-            chatId = message.GetChatID();
             textMessages.Enqueue(message);
             lastMessage = message;
         }

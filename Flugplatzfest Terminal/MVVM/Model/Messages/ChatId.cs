@@ -2,8 +2,8 @@
 {
     public class ChatId
     {
-        private InterfaceType interfaceType;
-        private long chatID;
+        private readonly InterfaceType interfaceType;
+        private readonly long chatID;
 
         public ChatId(InterfaceType interfaceType, long chatID)
         {
@@ -23,8 +23,7 @@
 
         public override bool Equals(object obj)
         {
-            ChatId other = obj as ChatId;
-            return other != null && other.chatID == chatID && other.interfaceType == interfaceType;
+            return obj is ChatId other && other.chatID == chatID && other.interfaceType == interfaceType;
         }
 
         public override int GetHashCode()

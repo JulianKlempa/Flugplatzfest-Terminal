@@ -4,7 +4,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
 {
     public class ChatList
     {
-        private Dictionary<ChatId, Chat> chatList;
+        private readonly Dictionary<ChatId, Chat> chatList;
         private readonly App app;
 
         public ChatList(App app)
@@ -20,11 +20,14 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
             bool exists = chatList.TryGetValue(message.GetChatID(), out Chat chat);
             if (!exists)
             {
-                chat = new Chat();
+                chat = new Chat(message);
                 app.GetEvents().OnChatCreated(chat);
             }
-            chat.AddMessage(message);
-            chatList[message.GetChatID()] = chat;
+            else
+            {
+                chat.AddMessage(message);
+                chatList[message.GetChatID()] = chat;
+            }
             if (message.GetMessageDirection() == MessageDirection.incoming) app.MessageReceived(message);
         }
 

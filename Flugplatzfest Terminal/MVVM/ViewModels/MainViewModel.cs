@@ -4,7 +4,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private NavigationStore navigationStore;
+        private readonly NavigationStore navigationStore;
 
         public ViewModelBase CurrentViewModel => navigationStore.CurrentViewModel;
 
