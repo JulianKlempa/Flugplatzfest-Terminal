@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Flugplatzfest_Terminal.ViewModels
+namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

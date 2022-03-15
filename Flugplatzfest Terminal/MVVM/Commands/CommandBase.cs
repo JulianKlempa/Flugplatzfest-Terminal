@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Flugplatzfest_Terminal.Commands
+namespace Flugplatzfest_Terminal.MVVM.Commands
 {
     public abstract class CommandBase : ICommand
     {

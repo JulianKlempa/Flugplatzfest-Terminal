@@ -1,4 +1,4 @@
-﻿namespace Flugplatzfest_Terminal.Model
+﻿namespace Flugplatzfest_Terminal.MVVM.Model
 {
     internal class Menu
     {

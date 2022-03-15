@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Flugplatzfest_Terminal.Model.Messages
+namespace Flugplatzfest_Terminal.MVVM.Model.Messages
 {
     public class TextMessage
     {

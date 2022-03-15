@@ -1,8 +1,8 @@
-﻿using Flugplatzfest_Terminal.Stores;
-using Flugplatzfest_Terminal.ViewModels;
+﻿using Flugplatzfest_Terminal.MVVM.Stores;
+using Flugplatzfest_Terminal.MVVM.ViewModels;
 using System;
 
-namespace Flugplatzfest_Terminal.Services
+namespace Flugplatzfest_Terminal.MVVM.Services
 {
     public class NavigationService
     {

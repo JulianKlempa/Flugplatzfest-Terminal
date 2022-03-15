@@ -1,7 +1,7 @@
-﻿using Flugplatzfest_Terminal.ViewModels;
+﻿using Flugplatzfest_Terminal.MVVM.ViewModels;
 using System;
 
-namespace Flugplatzfest_Terminal.Stores
+namespace Flugplatzfest_Terminal.MVVM.Stores
 {
     public class NavigationStore
     {

@@ -1,6 +1,6 @@
-﻿using Flugplatzfest_Terminal.Services;
+﻿using Flugplatzfest_Terminal.MVVM.Services;
 
-namespace Flugplatzfest_Terminal.Commands
+namespace Flugplatzfest_Terminal.MVVM.Commands
 {
     public class NavigateCommand : CommandBase
     {

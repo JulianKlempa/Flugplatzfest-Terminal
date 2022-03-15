@@ -1,6 +1,6 @@
-﻿using Flugplatzfest_Terminal.Model.Messages;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Messages;
 
-namespace Flugplatzfest_Terminal.ViewModels
+namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {
     public class MessageViewModel
     {

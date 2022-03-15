@@ -1,7 +1,7 @@
-﻿using Flugplatzfest_Terminal.Model.Messages;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Messages;
 using System;
 
-namespace Flugplatzfest_Terminal.Model.Interfaces
+namespace Flugplatzfest_Terminal.MVVM.Model.Interfaces
 {
     public class Interface
     {

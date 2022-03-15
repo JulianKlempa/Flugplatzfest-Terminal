@@ -1,9 +1,9 @@
-﻿using Flugplatzfest_Terminal.Model;
-using Flugplatzfest_Terminal.Model.Interfaces;
-using Flugplatzfest_Terminal.Model.Messages;
-using Flugplatzfest_Terminal.Services;
-using Flugplatzfest_Terminal.Stores;
-using Flugplatzfest_Terminal.ViewModels;
+﻿using Flugplatzfest_Terminal.MVVM.Model;
+using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
+using Flugplatzfest_Terminal.MVVM.Model.Messages;
+using Flugplatzfest_Terminal.MVVM.Services;
+using Flugplatzfest_Terminal.MVVM.Stores;
+using Flugplatzfest_Terminal.MVVM.ViewModels;
 using System;
 using System.Configuration;
 using System.Windows;

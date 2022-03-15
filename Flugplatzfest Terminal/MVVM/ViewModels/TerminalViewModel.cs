@@ -1,13 +1,13 @@
-﻿using Flugplatzfest_Terminal.Commands;
-using Flugplatzfest_Terminal.Model.Messages;
-using Flugplatzfest_Terminal.Services;
+﻿using Flugplatzfest_Terminal.MVVM.Commands;
+using Flugplatzfest_Terminal.MVVM.Model.Messages;
+using Flugplatzfest_Terminal.MVVM.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Windows.Input;
 
-namespace Flugplatzfest_Terminal.ViewModels
+namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {
     public class TerminalViewModel : ViewModelBase
     {

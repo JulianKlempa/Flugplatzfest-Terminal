@@ -1,8 +1,8 @@
-﻿using Flugplatzfest_Terminal.ViewModels;
+﻿using Flugplatzfest_Terminal.MVVM.ViewModels;
 using System.ComponentModel;
 using System.Windows;
 
-namespace Flugplatzfest_Terminal.Commands
+namespace Flugplatzfest_Terminal.MVVM.Commands
 {
     public class SaveMenuCommand : CommandBase
     {

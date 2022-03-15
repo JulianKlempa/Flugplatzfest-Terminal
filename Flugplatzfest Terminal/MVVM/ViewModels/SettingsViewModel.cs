@@ -1,8 +1,8 @@
-﻿using Flugplatzfest_Terminal.Commands;
-using Flugplatzfest_Terminal.Services;
+﻿using Flugplatzfest_Terminal.MVVM.Commands;
+using Flugplatzfest_Terminal.MVVM.Services;
 using System.Windows.Input;
 
-namespace Flugplatzfest_Terminal.ViewModels
+namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {

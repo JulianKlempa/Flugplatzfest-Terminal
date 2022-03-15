@@ -1,8 +1,8 @@
-﻿using Flugplatzfest_Terminal.Model.Interfaces;
-using Flugplatzfest_Terminal.Model.Messages;
-using Flugplatzfest_Terminal.ViewModels;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
+using Flugplatzfest_Terminal.MVVM.Model.Messages;
+using Flugplatzfest_Terminal.MVVM.ViewModels;
 
-namespace Flugplatzfest_Terminal.Commands
+namespace Flugplatzfest_Terminal.MVVM.Commands
 {
     public class SendMessageCommand : CommandBase
     {

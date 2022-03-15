@@ -93,23 +93,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\NavigateCommand.cs" />
-    <Compile Include="Commands\SaveMenuCommand.cs" />
-    <Compile Include="Commands\SendMessageCommand.cs" />
-    <Compile Include="Model\Messages\Chat.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Stores\NavigationStore.cs" />
-    <Compile Include="ViewModels\ChatViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\MessageViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\TerminalViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\Settings.xaml.cs">
+    <Compile Include="MVVM\Commands\CommandBase.cs" />
+    <Compile Include="MVVM\Commands\NavigateCommand.cs" />
+    <Compile Include="MVVM\Commands\SaveMenuCommand.cs" />
+    <Compile Include="MVVM\Commands\SendMessageCommand.cs" />
+    <Compile Include="MVVM\Model\Messages\Chat.cs" />
+    <Compile Include="MVVM\Services\NavigationService.cs" />
+    <Compile Include="MVVM\Stores\NavigationStore.cs" />
+    <Compile Include="MVVM\ViewModels\ChatViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\MainViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\MessageViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\SettingsViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\TerminalViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\ViewModelBase.cs" />
+    <Compile Include="MVVM\Views\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Terminal.xaml.cs">
+    <Compile Include="MVVM\Views\Terminal.xaml.cs">
       <DependentUpon>Terminal.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -124,25 +124,25 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Settings.xaml">
+    <Page Include="MVVM\Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Terminal.xaml">
+    <Page Include="MVVM\Views\Terminal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Events.cs" />
-    <Compile Include="Model\Interfaces\Interface.cs" />
-    <Compile Include="Model\Interfaces\Telegram.cs" />
-    <Compile Include="Model\Messages\ChatId.cs" />
-    <Compile Include="Model\Messages\ChatList.cs" />
-    <Compile Include="Model\Messages\InterfaceType.cs" />
-    <Compile Include="Model\Messages\MessageDirection.cs" />
-    <Compile Include="Model\Messages\TextMessage.cs" />
-    <Compile Include="Model\Menu.cs" />
+    <Compile Include="MVVM\Model\Events.cs" />
+    <Compile Include="MVVM\Model\Interfaces\Interface.cs" />
+    <Compile Include="MVVM\Model\Interfaces\Telegram.cs" />
+    <Compile Include="MVVM\Model\Messages\ChatId.cs" />
+    <Compile Include="MVVM\Model\Messages\ChatList.cs" />
+    <Compile Include="MVVM\Model\Messages\InterfaceType.cs" />
+    <Compile Include="MVVM\Model\Messages\MessageDirection.cs" />
+    <Compile Include="MVVM\Model\Messages\TextMessage.cs" />
+    <Compile Include="MVVM\Model\Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,6 +1,6 @@
-﻿using Flugplatzfest_Terminal.Model.Messages;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Messages;
 
-namespace Flugplatzfest_Terminal.Model
+namespace Flugplatzfest_Terminal.MVVM.Model
 {
     public delegate void NotifyMessageReceived(TextMessage message);
 

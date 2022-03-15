@@ -1,4 +1,4 @@
-﻿using Flugplatzfest_Terminal.Model.Messages;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Messages;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +7,7 @@ using Telegram.Bot.Extensions.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-namespace Flugplatzfest_Terminal.Model.Interfaces
+namespace Flugplatzfest_Terminal.MVVM.Model.Interfaces
 {
     internal class Telegram
     {

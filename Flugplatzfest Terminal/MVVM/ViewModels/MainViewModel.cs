@@ -1,6 +1,6 @@
-﻿using Flugplatzfest_Terminal.Stores;
+﻿using Flugplatzfest_Terminal.MVVM.Stores;
 
-namespace Flugplatzfest_Terminal.ViewModels
+namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
