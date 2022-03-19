@@ -1,24 +1,27 @@
 ﻿using Flugplatzfest_Terminal.MVVM.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Flugplatzfest_Terminal.MVVM.Commands
 {
-    public class SaveMenuCommand : CommandBase
+    public class RemoveMenuItemCommand : CommandBase
     {
-        private readonly App app;
         private readonly SettingsViewModel settingsViewModel;
 
-        public SaveMenuCommand(App app, SettingsViewModel settingsViewModel)
+        public RemoveMenuItemCommand(SettingsViewModel settingsViewModel)
         {
-            this.app = app;
             this.settingsViewModel = settingsViewModel;
             settingsViewModel.PropertyChanged += SettingsViewModel_PropertyChanged;
         }
 
         private void SettingsViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(settingsViewModel.Menu))
+            if (e.PropertyName == nameof(settingsViewModel.SelectedMenuItemViewModel))
             {
                 OnCanExecuteChanged();
             }
@@ -26,17 +29,15 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 
         public override void Execute(object parameter)
         {
-            app.GetMenu().ClearMenu();
-            foreach (MenuItemViewModel menuItemViewModel in settingsViewModel.Menu)
+            if (MessageBox.Show("Sind Sie sicher, dass sie das Element löschen wollen?", "Löschen", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                app.GetMenu().AddMenuItem(menuItemViewModel.GetMenuItem());
+                settingsViewModel.Menu.Remove(settingsViewModel.SelectedMenuItemViewModel);
             }
-            MessageBox.Show("Speisekarte wurde erfolgreich gespeichert.");
         }
 
         public override bool CanExecute(object parameter)
         {
-            return settingsViewModel.Menu.Count >= 1 && base.CanExecute(parameter);
+            return settingsViewModel.SelectedMenuItemViewModel != null && base.CanExecute(parameter);
         }
     }
 }

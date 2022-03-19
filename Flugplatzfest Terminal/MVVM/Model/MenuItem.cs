@@ -6,24 +6,25 @@
         private double price;
         private MenuItemType type;
 
-        public MenuItem(double price, string content)
+        public MenuItem(double price, string content, MenuItemType type)
         {
             this.price = price;
             this.content = content;
+            this.type = type;
         }
 
-        public MenuItem() : this(0, "")
+        public MenuItem() : this(0, "", MenuItemType.Food)
         {
         }
 
         public string Content
-        { get { return content; } set { content = value; } }
+        { get { return content; } }
 
         public double Price
-        { get { return price; } set { price = value; } }
+        { get { return price; } }
 
         public MenuItemType Type
-        { get { return type; } set { type = value; } }
+        { get { return type; } }
 
         public override string ToString()
         {

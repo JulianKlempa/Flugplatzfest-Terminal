@@ -106,8 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MVVM\Commands\AddMenuItemCommand.cs" />
     <Compile Include="MVVM\Commands\CommandBase.cs" />
     <Compile Include="MVVM\Commands\NavigateCommand.cs" />
+    <Compile Include="MVVM\Commands\RemoveMenuItemCommand.cs" />
     <Compile Include="MVVM\Commands\SaveMenuCommand.cs" />
     <Compile Include="MVVM\Commands\SendMessageCommand.cs" />
     <Compile Include="MVVM\Model\Interfaces\WhatsApp.cs" />

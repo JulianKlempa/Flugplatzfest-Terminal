@@ -14,5 +14,10 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
         {
             this.menuItem = menuItem;
         }
+
+        public MenuItem GetMenuItem()
+        {
+            return menuItem;
+        }
     }
 }

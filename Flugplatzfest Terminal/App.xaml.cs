@@ -66,11 +66,6 @@ namespace Flugplatzfest_Terminal
             return menu;
         }
 
-        public void SaveMenu(string menuString)
-        {
-            //menu.SetMenu(menuString);
-        }
-
         public ChatList GetChatList()
         {
             return chatList;

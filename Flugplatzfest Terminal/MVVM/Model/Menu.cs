@@ -14,8 +14,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
             using (StringReader reader = new StringReader(xmlString))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<MenuItem>));
-                //menu = serializer.Deserialize(reader) as List<MenuItem>;
-                menu = new List<MenuItem>();
+                menu = serializer.Deserialize(reader) as List<MenuItem>;
             }
         }
 
@@ -29,9 +28,9 @@ namespace Flugplatzfest_Terminal.MVVM.Model
             menu.Add(menuItem);
         }
 
-        public void RemoveMenuItem(int index)
+        public void ClearMenu()
         {
-            menu.RemoveAt(index);
+            menu.Clear();
         }
 
         public override string ToString()
