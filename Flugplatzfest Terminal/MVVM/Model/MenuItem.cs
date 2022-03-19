@@ -25,11 +25,6 @@
 
         public MenuItemType Type
         { get { return type; } }
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
     }
 
     public enum MenuItemType

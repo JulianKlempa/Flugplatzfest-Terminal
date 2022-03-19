@@ -36,11 +36,29 @@ namespace Flugplatzfest_Terminal.MVVM.Model
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
+            int index = 1;
+            builder.Append("Speisekarte \n");
+            builder.Append("\n");
             foreach (MenuItem menuItem in menu)
             {
-                builder.Append("Speisekarte \n");
-                builder.Append(menuItem.ToString());
+                if (menuItem.Type == MenuItemType.Food)
+                {
+                    builder.Append(string.Format("{0,0}. {1,-20}{2,50}€", index, menuItem.Content, menuItem.Price));
+                    index++;
+                }
             }
+            builder.Append("\n");
+            builder.Append("Getränkekarte \n");
+            builder.Append("\n");
+            foreach (MenuItem menuItem in menu)
+            {
+                if (menuItem.Type == MenuItemType.Drink)
+                {
+                    builder.Append(string.Format("{0,2}. {1,-10}{2,5}€", index, menuItem.Content, menuItem.Price));
+                    index++;
+                }
+            }
+
             return builder.ToString();
         }
 

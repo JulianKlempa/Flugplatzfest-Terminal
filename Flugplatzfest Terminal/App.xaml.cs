@@ -51,8 +51,7 @@ namespace Flugplatzfest_Terminal
         {
             if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
             {
-                //inter.SendMessage(new TextMessage(menu.ToString(), message.GetChatID(), MessageDirection.outgoing));
-                inter.SendMessage(new TextMessage("Speisekarte", message.GetChatID(), MessageDirection.outgoing));
+                inter.SendMessage(new TextMessage(menu.ToString(), message.GetChatID(), MessageDirection.outgoing));
             }
             else
             {

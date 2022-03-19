@@ -29,7 +29,7 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 
         public override void Execute(object parameter)
         {
-            settingsViewModel.Menu.Add(new MenuItemViewModel(new MenuItem(settingsViewModel.NewItemPrice, settingsViewModel.NewItemName)));
+            settingsViewModel.Menu.Add(new MenuItemViewModel(new MenuItem(settingsViewModel.NewItemPrice, settingsViewModel.NewItemName, MenuItemType.Food)));//TODO correct MenuType
         }
 
         public override bool CanExecute(object parameter)
