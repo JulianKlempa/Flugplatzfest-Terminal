@@ -23,15 +23,52 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Speisekarte" FontSize="24" />
-                <TextBox Grid.Row="1" AcceptsReturn="True" AcceptsTab="True" Text="{Binding MenuString, UpdateSourceTrigger=PropertyChanged}" />
+                <ListView Grid.Row="1" ItemsSource="{Binding Menu}" SelectedItem="{Binding SelectedMenuItemViewModel, Mode=OneWayToSource}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding ItemName}" />
+                                <TextBlock Grid.Column="2" Text="{Binding Price}" />
+                                <TextBlock Grid.Column="3" Text="€" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Element" />
+                    <TextBox Grid.Column="1" />
+                    <TextBlock Grid.Column="2" Text="Preis" />
+                    <TextBox Grid.Column="3" Width="50" />
+                </Grid>
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="Öffnen" />
+                    <Button Grid.Column="0" Content="Hinzufügen" />
+                    <Button Grid.Column="1" Content="Entfernen" />
                     <Button Grid.Column="2" Content="Speichern" Command="{Binding SaveMenuCommand}" />
                 </Grid>
             </Grid>
