@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -37,25 +38,28 @@ namespace Flugplatzfest_Terminal.MVVM.Model
         {
             StringBuilder builder = new StringBuilder();
             int index = 1;
-            builder.Append("Speisekarte \n");
-            builder.Append("\n");
+            builder.AppendLine("Speisekarte");
+            builder.AppendLine("");
             foreach (MenuItem menuItem in menu)
             {
                 if (menuItem.Type == MenuItemType.Food)
                 {
-                    builder.Append(string.Format("{0,0}. {1,-20}{2,50}€", index, menuItem.Content, menuItem.Price));
+                    builder.AppendLine(string.Format("{0,0}. {1,-20}{2,50}€", index, menuItem.Content, menuItem.Price));
                     index++;
                 }
             }
-            builder.Append("\n");
-            builder.Append("Getränkekarte \n");
-            builder.Append("\n");
-            foreach (MenuItem menuItem in menu)
+            if (menu.FirstOrDefault(x => x.Type == MenuItemType.Drink) != null)
             {
-                if (menuItem.Type == MenuItemType.Drink)
+                builder.AppendLine("");
+                builder.AppendLine("Getränkekarte");
+                builder.AppendLine("");
+                foreach (MenuItem menuItem in menu)
                 {
-                    builder.Append(string.Format("{0,2}. {1,-10}{2,5}€", index, menuItem.Content, menuItem.Price));
-                    index++;
+                    if (menuItem.Type == MenuItemType.Drink)
+                    {
+                        builder.AppendLine(string.Format("{0,2}. {1,-10}{2,5}€", index, menuItem.Content, menuItem.Price));
+                        index++;
+                    }
                 }
             }
 
