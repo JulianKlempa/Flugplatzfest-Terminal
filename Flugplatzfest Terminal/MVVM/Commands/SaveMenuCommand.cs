@@ -1,6 +1,5 @@
 ﻿using Flugplatzfest_Terminal.MVVM.ViewModels;
 using System.ComponentModel;
-using System.Windows;
 
 namespace Flugplatzfest_Terminal.MVVM.Commands
 {
@@ -18,7 +17,7 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 
         private void SettingsViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(settingsViewModel.MenuString))
+            if (e.PropertyName == nameof(settingsViewModel.Menu))
             {
                 OnCanExecuteChanged();
             }
@@ -26,16 +25,12 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 
         public override void Execute(object parameter)
         {
-            if (!string.IsNullOrEmpty(settingsViewModel.MenuString))
-            {
-                app.SaveMenu(settingsViewModel.MenuString);
-                MessageBox.Show("Speisekarte wurde gespeichert.");
-            }
+            //TODO
         }
 
         public override bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(settingsViewModel.MenuString) && base.CanExecute(parameter);
+            return settingsViewModel.Menu.Count >= 1 && base.CanExecute(parameter);
         }
     }
 }

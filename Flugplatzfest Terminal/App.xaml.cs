@@ -51,7 +51,8 @@ namespace Flugplatzfest_Terminal
         {
             if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
             {
-                inter.SendMessage(new TextMessage(menu.GetMenu(), message.GetChatID(), MessageDirection.outgoing));
+                //inter.SendMessage(new TextMessage(menu.ToString(), message.GetChatID(), MessageDirection.outgoing));
+                inter.SendMessage(new TextMessage("Speisekarte", message.GetChatID(), MessageDirection.outgoing));
             }
             else
             {
@@ -60,20 +61,14 @@ namespace Flugplatzfest_Terminal
             Console.WriteLine(message.GetMessage());
         }
 
-        public void SaveMenu(string menuString)
+        public Menu GetMenu()
         {
-            menu.SetMenu(menuString);
-
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
-            settings["Menu"].Value = menuString;
-            configFile.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            return menu;
         }
 
-        public string GetMenu()
+        public void SaveMenu(string menuString)
         {
-            return menu.GetMenu();
+            //menu.SetMenu(menuString);
         }
 
         public ChatList GetChatList()
@@ -99,6 +94,15 @@ namespace Flugplatzfest_Terminal
         private SettingsViewModel CreateSettingsViewModel()
         {
             return new SettingsViewModel(this, new NavigationService(navigationStore, CreateTerminalViewModel));
+        }
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            settings["Menu"].Value = menu.GetXmlString();
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
     }
 }
