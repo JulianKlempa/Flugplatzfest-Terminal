@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,14 @@ namespace Flugplatzfest_Terminal.MVVM.Model
             using (StringReader reader = new StringReader(xmlString))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<MenuItem>));
-                menu = serializer.Deserialize(reader) as List<MenuItem>;
+                try
+                {
+                    menu = serializer.Deserialize(reader) as List<MenuItem>;
+                }
+                catch (Exception)
+                {
+                    menu = new List<MenuItem>();
+                }
             }
         }
 
