@@ -6,7 +6,9 @@ using Flugplatzfest_Terminal.MVVM.Stores;
 using Flugplatzfest_Terminal.MVVM.ViewModels;
 using System;
 using System.Configuration;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace Flugplatzfest_Terminal
 {
@@ -36,6 +38,8 @@ namespace Flugplatzfest_Terminal
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
+
             navigationStore.CurrentViewModel = CreateTerminalViewModel();
 
             MainWindow = new MainWindow()

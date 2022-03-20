@@ -10,7 +10,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
     public class Menu
     {
         [XmlArray("MenuItemList"), XmlArrayItem(typeof(MenuItem), ElementName = "MenuItem")]
-        private List<MenuItem> menu;
+        private readonly List<MenuItem> menu;
 
         public Menu(string xmlString)
         {
@@ -44,7 +44,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
         }
 
         public override string ToString()
-        {
+        { //TODO fix formatting
             StringBuilder builder = new StringBuilder();
             int index = 1;
             builder.AppendLine("Speisekarte");
@@ -53,7 +53,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
             {
                 if (menuItem.Type == MenuItemType.Food)
                 {
-                    builder.AppendLine(string.Format("{0,0}. {1,-20}{2,50}€", index, menuItem.Content, menuItem.Price));
+                    builder.AppendLine(string.Format("{0,3}. {1,-30}{2,5:C}", index, menuItem.Content, menuItem.Price));
                     index++;
                 }
             }
@@ -66,7 +66,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
                 {
                     if (menuItem.Type == MenuItemType.Drink)
                     {
-                        builder.AppendLine(string.Format("{0,2}. {1,-10}{2,5}€", index, menuItem.Content, menuItem.Price));
+                        builder.AppendLine(string.Format("{0,3}. {1,-30}{2,5:C}", index, menuItem.Content, menuItem.Price));
                         index++;
                     }
                 }
@@ -80,10 +80,8 @@ namespace Flugplatzfest_Terminal.MVVM.Model
             using (TextWriter writer = new StringWriter())
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(MenuItem[]));
-                var test = menu.ToArray();
-                serializer.Serialize(writer, test);
-                var testString = writer.ToString();
-                return testString;
+                serializer.Serialize(writer, menu.ToArray());
+                return writer.ToString();
             }
         }
     }

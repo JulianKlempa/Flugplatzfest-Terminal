@@ -1,11 +1,6 @@
 ﻿using Flugplatzfest_Terminal.MVVM.Model;
 using Flugplatzfest_Terminal.MVVM.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Flugplatzfest_Terminal.MVVM.Commands
 {
@@ -21,7 +16,7 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 
         private void SettingsViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(settingsViewModel.NewItemName))
+            if (e.PropertyName == nameof(settingsViewModel.NewItemName) || e.PropertyName == nameof(settingsViewModel.SelectedMenuType))
             {
                 OnCanExecuteChanged();
             }
@@ -29,12 +24,25 @@ namespace Flugplatzfest_Terminal.MVVM.Commands
 
         public override void Execute(object parameter)
         {
-            settingsViewModel.Menu.Add(new MenuItemViewModel(new MenuItem(settingsViewModel.NewItemPrice, settingsViewModel.NewItemName, MenuItemType.Food)));//TODO correct MenuType
+            MenuItemType menuItemType;
+            switch (settingsViewModel.SelectedMenuType.Tag)
+            {
+                case "Drink":
+                    menuItemType = MenuItemType.Drink;
+                    break;
+
+                default:
+                    menuItemType = MenuItemType.Food;
+                    break;
+            }
+            settingsViewModel.Menu.Add(new MenuItemViewModel(new MenuItem(settingsViewModel.GetNewItemPrice(), settingsViewModel.NewItemName, menuItemType)));
+            settingsViewModel.NewItemName = "";
+            settingsViewModel.NewItemPrice = "";
         }
 
         public override bool CanExecute(object parameter)
         {
-            return !string.IsNullOrEmpty(settingsViewModel.NewItemName) && base.CanExecute(parameter);
+            return !string.IsNullOrEmpty(settingsViewModel.NewItemName) && settingsViewModel.SelectedMenuType != null && base.CanExecute(parameter);
         }
     }
 }

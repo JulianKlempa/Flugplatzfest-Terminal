@@ -10,6 +10,8 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
 
         public double Price => menuItem.Price;
 
+        public MenuItemType Type => menuItem.Type;
+
         public MenuItemViewModel(MenuItem menuItem)
         {
             this.menuItem = menuItem;

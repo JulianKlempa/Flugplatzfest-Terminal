@@ -1,9 +1,10 @@
 ﻿using Flugplatzfest_Terminal.MVVM.Commands;
-using Flugplatzfest_Terminal.MVVM.Model;
 using Flugplatzfest_Terminal.MVVM.Services;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -22,7 +23,9 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
         private readonly App app;
         private MenuItemViewModel selectedMenuItemViewModel;
         private string newItemName;
-        private double newItemPrice;
+        private double newItemPriceDouble;
+        private string newItemPrice;
+        private ComboBoxItem newItemComboBox;
 
         public SettingsViewModel(App app, NavigationService terminalViewNavigationService)
         {
@@ -46,10 +49,8 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
 
         private void LoadMenu()
         {
-            Menu menuApp = app.GetMenu();
-            List<MenuItem> test = menuApp.GetMenu();
             menu.Clear();
-            foreach (MenuItem menuItem in app.GetMenu().GetMenu())
+            foreach (Model.MenuItem menuItem in app.GetMenu().GetMenu())
             {
                 menu.Add(new MenuItemViewModel(menuItem));
             }
@@ -75,14 +76,39 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
             }
         }
 
-        public double NewItemPrice
+        public string NewItemPrice
         {
             get => newItemPrice;
             set
             {
-                newItemPrice = value;
-                OnPropertyChanged(nameof(NewItemPrice));
+                if (newItemPrice != value && !value.Contains("."))
+                {
+                    try
+                    {
+                        newItemPriceDouble = value != "" ? Convert.ToDouble(value) : 0.0;
+                        newItemPrice = value;
+                        OnPropertyChanged(nameof(NewItemPrice));
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
             }
+        }
+
+        public ComboBoxItem SelectedMenuType
+        {
+            get => newItemComboBox;
+            set
+            {
+                newItemComboBox = value;
+                OnPropertyChanged(nameof(SelectedMenuType));
+            }
+        }
+
+        public double GetNewItemPrice()
+        {
+            return newItemPriceDouble;
         }
     }
 }

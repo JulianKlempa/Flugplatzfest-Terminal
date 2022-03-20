@@ -46,10 +46,8 @@
                                         <DataTrigger Binding="{Binding Incoming}" Value="True">
                                             <Setter Property="Text" Value="&#x1F846;" />
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Incoming}" Value="False">
-                                            <Setter Property="Text" Value="&#x1F844;" />
-                                        </DataTrigger>
                                     </Style.Triggers>
+                                    <Setter Property="Text" Value="&#x1F844;" />
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
