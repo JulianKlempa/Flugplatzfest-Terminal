@@ -116,6 +116,9 @@
     <Compile Include="MVVM\Model\Interfaces\WhatsApp.cs" />
     <Compile Include="MVVM\Model\Menu\MenuItem.cs" />
     <Compile Include="MVVM\Model\Messages\Chat.cs" />
+    <Compile Include="MVVM\Model\Order\Order.cs" />
+    <Compile Include="MVVM\Model\Order\OrderItem.cs" />
+    <Compile Include="MVVM\Model\Order\OrdersList.cs" />
     <Compile Include="MVVM\Model\ReplyBot\ReplyBot.cs" />
     <Compile Include="MVVM\Services\NavigationService.cs" />
     <Compile Include="MVVM\Stores\NavigationStore.cs" />

@@ -2,6 +2,7 @@
 using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
 using Flugplatzfest_Terminal.MVVM.Model.Menu;
 using Flugplatzfest_Terminal.MVVM.Model.Messages;
+using Flugplatzfest_Terminal.MVVM.Model.Order;
 using Flugplatzfest_Terminal.MVVM.Model.ReplyBot;
 using Flugplatzfest_Terminal.MVVM.Services;
 using Flugplatzfest_Terminal.MVVM.Stores;
@@ -24,6 +25,7 @@ namespace Flugplatzfest_Terminal
         private readonly NavigationStore navigationStore;
         private readonly Events events;
         private readonly ReplyBot replyBot;
+        private readonly OrdersList ordersList;
         private bool botActive;
 
         public App()
@@ -38,9 +40,12 @@ namespace Flugplatzfest_Terminal
 
             inter = new Interface(telegramToken, events);
 
+            ordersList = new OrdersList();
+
             botActive = true;
 
             replyBot = new ReplyBot(chatList, inter, this);
+            //TODO add explaination message
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -81,6 +86,11 @@ namespace Flugplatzfest_Terminal
         public Events GetEvents()
         {
             return events;
+        }
+
+        public OrdersList GetOrdersList()
+        {
+            return ordersList;
         }
 
         public bool GetBotActive()

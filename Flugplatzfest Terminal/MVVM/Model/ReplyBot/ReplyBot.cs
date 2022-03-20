@@ -1,5 +1,7 @@
 ﻿using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
 using Flugplatzfest_Terminal.MVVM.Model.Messages;
+using System;
+using System.Linq;
 
 namespace Flugplatzfest_Terminal.MVVM.Model.ReplyBot
 {
@@ -23,10 +25,15 @@ namespace Flugplatzfest_Terminal.MVVM.Model.ReplyBot
                 if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
                 {
                     inter.SendMessage(message.Reply(app.GetMenu().ToString()));
+                    inter.SendMessage(new TextMessage("Bitte Nummer zurückschreiben", message.GetChatID(), MessageDirection.outgoing));
                 }
                 else
-                {//TODO implement interaction
-                    inter.SendMessage(new TextMessage(message.GetMessage(), message.GetChatID(), MessageDirection.outgoing));
+                {
+                    string messageString = message.GetMessage();
+                    foreach (string orderItemString in messageString.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        string resultString = new string(orderItemString.Where(char.IsDigit).ToArray());
+                    }
                 }
             }
         }
