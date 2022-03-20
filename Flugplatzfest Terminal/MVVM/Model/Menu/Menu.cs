@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Flugplatzfest_Terminal.MVVM.Model
+namespace Flugplatzfest_Terminal.MVVM.Model.Menu
 {
     public class Menu
     {

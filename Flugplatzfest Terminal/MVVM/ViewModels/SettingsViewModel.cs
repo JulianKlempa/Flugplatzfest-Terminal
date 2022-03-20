@@ -39,6 +39,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
             AddMenuItemCommand = new AddMenuItemCommand(this);
             RemoveMenuItemCommand = new RemoveMenuItemCommand(this);
             //TODO TelegramToken
+            //TODO Add turn on off bot
         }
 
         private void Menu_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -50,7 +51,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
         private void LoadMenu()
         {
             menu.Clear();
-            foreach (Model.MenuItem menuItem in app.GetMenu().GetMenu())
+            foreach (Model.Menu.MenuItem menuItem in app.GetMenu().GetMenu())
             {
                 menu.Add(new MenuItemViewModel(menuItem));
             }

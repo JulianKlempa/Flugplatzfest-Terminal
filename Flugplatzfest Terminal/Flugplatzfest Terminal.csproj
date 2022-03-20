@@ -106,6 +106,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Flugplatzfest_Terminal\MVVM\Model\MenuItem.cs" />
     <Compile Include="MVVM\Commands\AddMenuItemCommand.cs" />
     <Compile Include="MVVM\Commands\CommandBase.cs" />
     <Compile Include="MVVM\Commands\NavigateCommand.cs" />
@@ -113,8 +114,9 @@
     <Compile Include="MVVM\Commands\SaveMenuCommand.cs" />
     <Compile Include="MVVM\Commands\SendMessageCommand.cs" />
     <Compile Include="MVVM\Model\Interfaces\WhatsApp.cs" />
-    <Compile Include="MVVM\Model\MenuItem.cs" />
+    <Compile Include="MVVM\Model\Menu\MenuItem.cs" />
     <Compile Include="MVVM\Model\Messages\Chat.cs" />
+    <Compile Include="MVVM\Model\ReplyBot\ReplyBot.cs" />
     <Compile Include="MVVM\Services\NavigationService.cs" />
     <Compile Include="MVVM\Stores\NavigationStore.cs" />
     <Compile Include="MVVM\ViewModels\ChatViewModel.cs" />
@@ -160,7 +162,7 @@
     <Compile Include="MVVM\Model\Messages\InterfaceType.cs" />
     <Compile Include="MVVM\Model\Messages\MessageDirection.cs" />
     <Compile Include="MVVM\Model\Messages\TextMessage.cs" />
-    <Compile Include="MVVM\Model\Menu.cs" />
+    <Compile Include="MVVM\Model\Menu\Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

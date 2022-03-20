@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Flugplatzfest_Terminal.MVVM.Model
+namespace Flugplatzfest_Terminal.MVVM.Model.Menu
 {
     [XmlRoot("Menu")]
     public class MenuItem

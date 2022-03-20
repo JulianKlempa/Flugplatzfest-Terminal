@@ -4,10 +4,10 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
 {
     public class TextMessage
     {
-        private readonly string message;
+        private string message;
         private readonly ChatId chatID;
-        private readonly MessageDirection messageDirection;
-        private readonly DateTime dateTime;
+        private MessageDirection messageDirection;
+        private DateTime dateTime;
 
         public TextMessage(string message, ChatId chatID, MessageDirection messageDirection)
         {
@@ -15,6 +15,14 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Messages
             this.chatID = chatID;
             this.messageDirection = messageDirection;
             dateTime = DateTime.Now;
+        }
+
+        public TextMessage Reply(string text)
+        {
+            message = text;
+            messageDirection = MessageDirection.outgoing;
+            dateTime = DateTime.Now;
+            return this;
         }
 
         public string GetMessage()

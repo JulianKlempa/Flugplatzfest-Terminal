@@ -1,4 +1,4 @@
-﻿using Flugplatzfest_Terminal.MVVM.Model;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Menu;
 
 namespace Flugplatzfest_Terminal.MVVM.ViewModels
 {

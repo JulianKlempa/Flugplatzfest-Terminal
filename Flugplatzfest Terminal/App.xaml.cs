@@ -1,10 +1,11 @@
 ﻿using Flugplatzfest_Terminal.MVVM.Model;
 using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
+using Flugplatzfest_Terminal.MVVM.Model.Menu;
 using Flugplatzfest_Terminal.MVVM.Model.Messages;
+using Flugplatzfest_Terminal.MVVM.Model.ReplyBot;
 using Flugplatzfest_Terminal.MVVM.Services;
 using Flugplatzfest_Terminal.MVVM.Stores;
 using Flugplatzfest_Terminal.MVVM.ViewModels;
-using System;
 using System.Configuration;
 using System.Globalization;
 using System.Windows;
@@ -22,6 +23,7 @@ namespace Flugplatzfest_Terminal
         private readonly ChatList chatList;
         private readonly NavigationStore navigationStore;
         private readonly Events events;
+        private readonly ReplyBot replyBot;
 
         public App()
         {
@@ -34,6 +36,8 @@ namespace Flugplatzfest_Terminal
             string telegramToken = ConfigurationManager.AppSettings.Get("TelegramToken");
 
             inter = new Interface(telegramToken, events);
+
+            replyBot = new ReplyBot(chatList, inter, this);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -53,15 +57,7 @@ namespace Flugplatzfest_Terminal
 
         public void MessageReceived(TextMessage message)
         {
-            if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
-            {
-                inter.SendMessage(new TextMessage(menu.ToString(), message.GetChatID(), MessageDirection.outgoing));
-            }
-            else
-            {
-                inter.SendMessage(new TextMessage(message.GetMessage(), message.GetChatID(), MessageDirection.outgoing));
-            }
-            Console.WriteLine(message.GetMessage());
+            replyBot.Reply(message);
         }
 
         public Menu GetMenu()
