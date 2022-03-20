@@ -9,6 +9,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model
 {
     public class Menu
     {
+        [XmlArray("MenuItemList"), XmlArrayItem(typeof(MenuItem), ElementName = "MenuItem")]
         private List<MenuItem> menu;
 
         public Menu(string xmlString)
@@ -76,11 +77,13 @@ namespace Flugplatzfest_Terminal.MVVM.Model
 
         public string GetXmlString()
         {
-            using (StringWriter writer = new StringWriter())
+            using (TextWriter writer = new StringWriter())
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<MenuItem>));
-                serializer.Serialize(writer, menu);
-                return writer.ToString();
+                XmlSerializer serializer = new XmlSerializer(typeof(MenuItem[]));
+                var test = menu.ToArray();
+                serializer.Serialize(writer, test);
+                var testString = writer.ToString();
+                return testString;
             }
         }
     }

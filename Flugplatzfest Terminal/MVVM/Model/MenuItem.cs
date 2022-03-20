@@ -1,16 +1,15 @@
-﻿namespace Flugplatzfest_Terminal.MVVM.Model
+﻿using System.Xml.Serialization;
+
+namespace Flugplatzfest_Terminal.MVVM.Model
 {
+    [XmlRoot("Menu")]
     public class MenuItem
     {
-        private string content;
-        private double price;
-        private MenuItemType type;
-
         public MenuItem(double price, string content, MenuItemType type)
         {
-            this.price = price;
-            this.content = content;
-            this.type = type;
+            Price = price;
+            Content = content;
+            Type = type;
         }
 
         public MenuItem() : this(0, "", MenuItemType.Food)
@@ -18,13 +17,13 @@
         }
 
         public string Content
-        { get { return content; } }
+        { get; set; }
 
         public double Price
-        { get { return price; } }
+        { get; set; }
 
         public MenuItemType Type
-        { get { return type; } }
+        { get; set; }
     }
 
     public enum MenuItemType
