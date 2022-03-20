@@ -26,6 +26,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
         private double newItemPriceDouble;
         private string newItemPrice;
         private ComboBoxItem newItemComboBox;
+        private bool botActive = true;
 
         public SettingsViewModel(App app, NavigationService terminalViewNavigationService)
         {
@@ -39,7 +40,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
             AddMenuItemCommand = new AddMenuItemCommand(this);
             RemoveMenuItemCommand = new RemoveMenuItemCommand(this);
             //TODO TelegramToken
-            //TODO Add turn on off bot
+            //TODO Add reorder Menu
         }
 
         private void Menu_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -94,6 +95,17 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
                     {
                     }
                 }
+            }
+        }
+
+        public bool BotActive
+        {
+            get => botActive;
+            set
+            {
+                botActive = value;
+                app.SetBotActive(botActive);
+                OnPropertyChanged(nameof(BotActive));
             }
         }
 

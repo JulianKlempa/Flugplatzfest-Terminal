@@ -24,6 +24,7 @@ namespace Flugplatzfest_Terminal
         private readonly NavigationStore navigationStore;
         private readonly Events events;
         private readonly ReplyBot replyBot;
+        private bool botActive;
 
         public App()
         {
@@ -36,6 +37,8 @@ namespace Flugplatzfest_Terminal
             string telegramToken = ConfigurationManager.AppSettings.Get("TelegramToken");
 
             inter = new Interface(telegramToken, events);
+
+            botActive = true;
 
             replyBot = new ReplyBot(chatList, inter, this);
         }
@@ -78,6 +81,16 @@ namespace Flugplatzfest_Terminal
         public Events GetEvents()
         {
             return events;
+        }
+
+        public bool GetBotActive()
+        {
+            return botActive;
+        }
+
+        public void SetBotActive(bool isActive)
+        {
+            botActive = isActive;
         }
 
         private TerminalViewModel CreateTerminalViewModel()

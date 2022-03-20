@@ -18,13 +18,16 @@ namespace Flugplatzfest_Terminal.MVVM.Model.ReplyBot
 
         public void Reply(TextMessage message)
         {
-            if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
+            if (app.GetBotActive())
             {
-                inter.SendMessage(message.Reply(app.GetMenu().ToString()));
-            }
-            else
-            {//TODO implement interaction
-                inter.SendMessage(new TextMessage(message.GetMessage(), message.GetChatID(), MessageDirection.outgoing));
+                if (chatList.GetChat(message.GetChatID())?.GetAllMessages().Count <= 1 || message.GetMessage().ToLower().Contains("karte"))
+                {
+                    inter.SendMessage(message.Reply(app.GetMenu().ToString()));
+                }
+                else
+                {//TODO implement interaction
+                    inter.SendMessage(new TextMessage(message.GetMessage(), message.GetChatID(), MessageDirection.outgoing));
+                }
             }
         }
     }

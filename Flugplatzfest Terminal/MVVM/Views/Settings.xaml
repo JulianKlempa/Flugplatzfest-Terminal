@@ -116,7 +116,7 @@
                     Stroke="Black"
                     Fill="Transparent" />
                     <TextBlock Text="Automatisch Antworten" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 5" />
-                    <CheckBox Grid.Column="2" Grid.Row="0" Content="Aktiv" VerticalContentAlignment="Center" Margin="0 5" IsChecked="True" />
+                    <CheckBox Grid.Column="2" Grid.Row="0" Content="Aktiv" VerticalContentAlignment="Center" Margin="0 5" IsChecked="{Binding BotActive}" />
                     <TextBlock Grid.Column="0" Grid.Row="1" Text="Telegram Token" Margin="0 5" />
                     <TextBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" Margin="0 5" />
                     <Button Grid.Column="2" Grid.Row="1" Content="Übernehmen" Margin="0 5" />
