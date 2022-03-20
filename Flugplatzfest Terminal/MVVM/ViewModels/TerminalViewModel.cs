@@ -82,7 +82,6 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
             }
         }
 
-        //TODO send on ENTER
         public string SendMessageText
         {
             get => sendMessageText;

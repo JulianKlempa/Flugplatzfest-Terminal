@@ -94,7 +94,11 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding SendMessageText, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding SendMessageText, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding SendCommand}" Key="Return" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Content="Senden" Grid.Column="1" Grid.Row="1" Command="{Binding SendCommand}" />
         </Grid>
     </Grid>
