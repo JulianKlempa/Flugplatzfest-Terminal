@@ -4,7 +4,7 @@
 
     public class OrderItem
     {
-        private MenuItem menuItem;
+        private readonly MenuItem menuItem;
         private int amount;
 
         public OrderItem(MenuItem menuItem)

@@ -1,4 +1,5 @@
-﻿using Flugplatzfest_Terminal.MVVM.Model.Messages;
+﻿using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
+using Flugplatzfest_Terminal.MVVM.Model.Messages;
 using System;
 
 namespace Flugplatzfest_Terminal.MVVM.ViewModels

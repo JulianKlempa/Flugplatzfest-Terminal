@@ -1,4 +1,6 @@
-﻿namespace Flugplatzfest_Terminal.MVVM.Model.Messages
+﻿using Flugplatzfest_Terminal.MVVM.Model.Interfaces;
+
+namespace Flugplatzfest_Terminal.MVVM.Model.Messages
 {
     public class ChatId
     {

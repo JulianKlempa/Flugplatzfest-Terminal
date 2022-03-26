@@ -125,6 +125,7 @@
     <Compile Include="MVVM\ViewModels\MainViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MenuItemViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MessageViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\OrderViewModel.cs" />
     <Compile Include="MVVM\ViewModels\SettingsViewModel.cs" />
     <Compile Include="MVVM\ViewModels\TerminalViewModel.cs" />
     <Compile Include="MVVM\ViewModels\ViewModelBase.cs" />
@@ -161,7 +162,7 @@
     <Compile Include="MVVM\Model\Interfaces\Telegram.cs" />
     <Compile Include="MVVM\Model\Messages\ChatId.cs" />
     <Compile Include="MVVM\Model\Messages\ChatList.cs" />
-    <Compile Include="MVVM\Model\Messages\InterfaceType.cs" />
+    <Compile Include="MVVM\Model\Interfaces\InterfaceType.cs" />
     <Compile Include="MVVM\Model\Messages\MessageDirection.cs" />
     <Compile Include="MVVM\Model\Messages\TextMessage.cs" />
     <Compile Include="MVVM\Model\Menu\Menu.cs" />

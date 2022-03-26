@@ -37,7 +37,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.ReplyBot
                     Order.Order order = app.GetOrdersList().GetOrder(message.GetChatID());
                     if (order == null)
                     {
-                        order = new Order.Order(message.GetChatID());
+                        order = new Order.Order(message.GetChatID(), app);
                         app.GetOrdersList().AddOrder(order);
                     }
                     foreach (string orderItemString in messageString.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
@@ -77,16 +77,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.ReplyBot
                             index += 2;
                         }
                     }
-                    double price = 0.0;
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.AppendLine("Ihre aktuelle Bestellung:");
-                    foreach (OrderItem item in order.GetOrderItems())
-                    {
-                        price += item.GetMenuItem().Price * item.GetAmount();
-                        stringBuilder.AppendLine(string.Format("{0,3}x{1,-30}{2,5:C}", item.GetAmount(), item.GetMenuItem().Content, item.GetMenuItem().Price * item.GetAmount()));
-                    }
-                    stringBuilder.AppendLine(String.Format("Gesamtkosten: {0:C}", price));
-                    inter.SendMessage(message.Reply(stringBuilder.ToString()));
+                    inter.SendMessage(message.Reply(order.ToString()));
                 }
             }
         }

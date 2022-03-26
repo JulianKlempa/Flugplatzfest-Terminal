@@ -1,4 +1,4 @@
-﻿namespace Flugplatzfest_Terminal.MVVM.Model.Messages
+﻿namespace Flugplatzfest_Terminal.MVVM.Model.Interfaces
 {
     public enum InterfaceType
     {

@@ -18,6 +18,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
 
         public ObservableCollection<ChatViewModel> Chats { get; set; }
         public ObservableCollection<MessageViewModel> Messages { get; set; }
+        public ObservableCollection<OrderViewModel> Orders { get; set; }
 
         private readonly List<ChatViewModel> chats;
 
@@ -32,12 +33,29 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
 
             Chats = new ObservableCollection<ChatViewModel>(chats);
             Messages = new ObservableCollection<MessageViewModel>();
+            Orders = new ObservableCollection<OrderViewModel>();
 
             SendCommand = new SendMessageCommand(this, app.GetInterface());
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
             app.GetEvents().ChatUpdated += UpdateChats;
-            //TODO add chats
+            app.GetEvents().OrderChanged += OrderChanged;
+        }
+
+        private void OrderChanged(Model.Order.Order order)
+        {
+            App.Current.Dispatcher.Invoke(delegate
+            {
+                OrderViewModel orderViewModel = Orders.FirstOrDefault(x => x.GetOrder() != null && x.GetOrder().GetChatId().Equals(order.GetChatId()));
+                if (orderViewModel != null)
+                {
+                    orderViewModel.UpdateOrder(order);
+                }
+                else
+                {
+                    Orders.Add(new OrderViewModel(order));
+                }
+            });
         }
 
         private void UpdateChats(Chat chat)
@@ -101,6 +119,15 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
                 chat = selectedChatViewmodel?.GetChat();
                 UpdateMessages();
                 OnPropertyChanged(nameof(SelectedChatViewModel));
+            }
+        }
+
+        public OrderViewModel SelectedOrderViewModel
+        {
+            set
+            {
+                OnPropertyChanged(nameof(SelectedOrderViewModel));
+                SelectedChatViewModel = Chats.Where(x => x.GetChat().GetChatId().Equals(value.GetOrder().GetChatId())).FirstOrDefault();
             }
         }
 

@@ -22,8 +22,14 @@
         <TextBlock Grid.Row="1" Grid.Column="0" FontSize="24" Text="Bestellungen" Margin="10" />
         <TextBlock Grid.Row="1" Grid.Column="1" FontSize="24" Text="Chats" Margin="10" />
         <TextBlock Grid.Row="1" Grid.Column="2" FontSize="24" Text="Chat" Margin="10" />
-        <ListView Grid.Row="2" Grid.Column="0"></ListView>
-        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Chats}" SelectedItem="{Binding SelectedChatViewModel, Mode=OneWayToSource}">
+        <ListView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrderViewModel, Mode=OneWayToSource}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding OrderContent}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Chats}" SelectedItem="{Binding SelectedChatViewModel, Mode=TwoWay}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalAlignment" Value="Stretch" />

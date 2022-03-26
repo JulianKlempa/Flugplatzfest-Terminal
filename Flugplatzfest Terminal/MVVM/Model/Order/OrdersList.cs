@@ -6,7 +6,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Order
 {
     public class OrdersList
     {
-        private List<Order> orders;
+        private readonly List<Order> orders;
 
         public OrdersList()
         {

@@ -8,6 +8,8 @@ namespace Flugplatzfest_Terminal.MVVM.Model
 
     public delegate void NotifyChatUpdated(Chat chat);
 
+    public delegate void NotifyOrderChanged(Order.Order order);
+
     public class Events
     {
         public event NotifyMessageReceived MessageReceived;
@@ -15,6 +17,8 @@ namespace Flugplatzfest_Terminal.MVVM.Model
         public event NotifyMessageSent MessageSent;
 
         public event NotifyChatUpdated ChatUpdated;
+
+        public event NotifyOrderChanged OrderChanged;
 
         public virtual void OnMessageReceived(TextMessage message)
         {
@@ -29,6 +33,11 @@ namespace Flugplatzfest_Terminal.MVVM.Model
         public virtual void OnChatUpdated(Chat chat)
         {
             ChatUpdated?.Invoke(chat);
+        }
+
+        public virtual void OnOrderChanged(Order.Order order)
+        {
+            OrderChanged?.Invoke(order);
         }
     }
 }
