@@ -37,6 +37,7 @@ namespace Flugplatzfest_Terminal.MVVM.ViewModels
             NavigateSettingsCommand = new NavigateCommand(settingsViewNavigationService);
 
             app.GetEvents().ChatUpdated += UpdateChats;
+            //TODO add chats
         }
 
         private void UpdateChats(Chat chat)
