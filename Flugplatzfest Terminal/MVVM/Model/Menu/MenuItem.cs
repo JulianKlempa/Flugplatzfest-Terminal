@@ -24,6 +24,9 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Menu
 
         public MenuItemType Type
         { get; set; }
+
+        public int Index
+        { get; set; }
     }
 
     public enum MenuItemType

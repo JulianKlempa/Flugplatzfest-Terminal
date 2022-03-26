@@ -11,11 +11,17 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Order
         public Order(ChatId chatId)
         {
             this.chatId = chatId;
+            orderItems = new List<OrderItem>();
         }
 
         public void AddOrderItem(OrderItem orderItem)
         {
             orderItems.Add(orderItem);
+        }
+
+        public ChatId GetChatId()
+        {
+            return chatId;
         }
     }
 }

@@ -28,6 +28,11 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Menu
             }
         }
 
+        public MenuItem GetMenuItem(int index)
+        {
+            return menu.Where(x => x.Index == index).FirstOrDefault();
+        }
+
         public List<MenuItem> GetMenu()
         {
             return menu;
@@ -54,6 +59,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Menu
                 if (menuItem.Type == MenuItemType.Food)
                 {
                     builder.AppendLine(string.Format("{0,3}. {1,-30}{2,5:C}", index, menuItem.Content, menuItem.Price));
+                    menuItem.Index = index;
                     index++;
                 }
             }
@@ -67,6 +73,7 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Menu
                     if (menuItem.Type == MenuItemType.Drink)
                     {
                         builder.AppendLine(string.Format("{0,3}. {1,-30}{2,5:C}", index, menuItem.Content, menuItem.Price));
+                        menuItem.Index = index;
                         index++;
                     }
                 }

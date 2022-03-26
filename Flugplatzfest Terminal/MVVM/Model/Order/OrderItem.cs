@@ -10,7 +10,12 @@
         public OrderItem(MenuItem menuItem, int amount = 1)
         {
             this.menuItem = menuItem;
-            this.amount = amount;
+            this.amount = amount != 0 ? amount : 1;
+        }
+
+        public MenuItem GetMenuItem()
+        {
+            return menuItem;
         }
     }
 }
