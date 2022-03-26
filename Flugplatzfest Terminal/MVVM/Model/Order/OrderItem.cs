@@ -7,10 +7,19 @@
         private MenuItem menuItem;
         private int amount;
 
-        public OrderItem(MenuItem menuItem, int amount = 1)
+        public OrderItem(MenuItem menuItem)
         {
             this.menuItem = menuItem;
-            this.amount = amount != 0 ? amount : 1;
+        }
+
+        public void SetAmount(int amount)
+        {
+            this.amount = amount;
+        }
+
+        public int GetAmount()
+        {
+            return amount;
         }
 
         public MenuItem GetMenuItem()

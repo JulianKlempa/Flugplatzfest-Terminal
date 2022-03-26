@@ -16,6 +16,19 @@ namespace Flugplatzfest_Terminal.MVVM.Model.Menu
         {
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is MenuItem other && other.Content == this.Content && other.Type == this.Type && other.Price == this.Price;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + Price.GetHashCode();
+            hash = (hash * 7) + Content.GetHashCode();
+            return hash;
+        }
+
         public string Content
         { get; set; }
 

@@ -106,7 +106,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Flugplatzfest_Terminal\MVVM\Model\MenuItem.cs" />
     <Compile Include="MVVM\Commands\AddMenuItemCommand.cs" />
     <Compile Include="MVVM\Commands\CommandBase.cs" />
     <Compile Include="MVVM\Commands\NavigateCommand.cs" />
